@@ -1,0 +1,9 @@
+../Core/Src/main.c:95:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/main.c:113:5:main	8	static
+../Core/Src/main.c:163:6:SystemClock_Config	88	static
+../Core/Src/main.c:210:13:MX_TIM1_Init	96	static
+../Core/Src/main.c:285:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:318:13:MX_GPIO_Init	48	static
+../Core/Src/main.c:361:6:playSong	16	static
+../Core/Src/main.c:372:6:playNote	104	static
+../Core/Src/main.c:449:6:Error_Handler	4	static,ignoring_inline_asm
