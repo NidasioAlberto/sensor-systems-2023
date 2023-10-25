@@ -123,7 +123,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   switch (GPIO_Pin)
   {
   case Microphone_Pin:
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     play_song(); // Start the song from the beginning
     break;
   default:
@@ -134,7 +133,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   play_next_note();
-  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 }
 
 void play_song()
