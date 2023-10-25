@@ -1,0 +1,14 @@
+../Core/Src/main.c:121:6:HAL_GPIO_EXTI_Callback	2
+../Core/Src/main.c:134:6:HAL_TIM_PeriodElapsedCallback	1
+../Core/Src/main.c:140:6:play_song	1
+../Core/Src/main.c:152:6:play_next_note	2
+../Core/Src/main.c:167:6:play_note	7
+../Core/Src/main.c:226:6:setup_tim2_next_interrupt	5
+../Core/Src/main.c:267:5:main	1
+../Core/Src/main.c:316:6:SystemClock_Config	3
+../Core/Src/main.c:361:13:MX_NVIC_Init	1
+../Core/Src/main.c:373:13:MX_TIM1_Init	7
+../Core/Src/main.c:447:13:MX_TIM2_Init	4
+../Core/Src/main.c:491:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:523:13:MX_GPIO_Init	1
+../Core/Src/main.c:573:6:Error_Handler	1
