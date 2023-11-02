@@ -18,11 +18,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdio.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,6 +32,14 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+// Potentiometer
+#define REFERENCE 3.3f
+#define MAX_ADC_VALUE 4095
+
+// Temperature
+#define V25 0.76f
+#define AVG_SLOPE 0.0025f // mV/°C
 
 /* USER CODE END PD */
 
@@ -48,6 +56,9 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
+volatile uint16_t buffer[3];
+volatile uint8_t resultValid = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -63,16 +74,6 @@ static void MX_ADC1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-int _write(int file, char* ptr, int len)
-{
-    for(int i = 0; i < len; i++)
-    {
-    	HAL_UART_Transmit(&huart2, (uint8_t*)ptr++, 1, 1000);
-    }
-
-    return len;
-}
-
 /* USER CODE END 0 */
 
 /**
@@ -82,6 +83,8 @@ int _write(int file, char* ptr, int len)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
+  char printBuffer[100];
 
   /* USER CODE END 1 */
 
@@ -108,25 +111,32 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-  uint16_t adc_conversions[3];
-
-  printf("hi mom\n\r");
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
-	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_conversions, 3);
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)buffer, 3);
 
-	float voltage = (float)adc_conversions[1] / 4095.0 * 3.3;
-	float temperature = (voltage - 0.76) / 0.0025 + 25;
+	while(!resultValid){}
+	resultValid = 0;
 
-	printf("temp: %f\n\r", temperature);
+	// Convert the results
+	float potentiometer = (buffer[0] * REFERENCE) / MAX_ADC_VALUE;
+	float temp = (buffer[1] * REFERENCE) / MAX_ADC_VALUE;
+	temp = ((temp - V25) / AVG_SLOPE) + 25;
+	float vref = (buffer[2] * REFERENCE) / MAX_ADC_VALUE;
 
+	// Print the result to screen
+	sprintf(printBuffer, "Measures: %f %f %f\r\n", potentiometer, temp, vref);
+	HAL_UART_Transmit(&huart2, (uint8_t *)printBuffer, strlen(printBuffer), HAL_MAX_DELAY);
+
+	// Delay
 	HAL_Delay(1000);
+
+    /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -335,7 +345,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+	// Toggle the result validity flag
+	resultValid = 1;
+}
 /* USER CODE END 4 */
 
 /**
