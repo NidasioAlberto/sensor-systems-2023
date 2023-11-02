@@ -384,8 +384,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 		dataReady = 1;
 		bufferIndex = 0;
 	}
-
-	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 }
 
 /* USER CODE END 4 */
