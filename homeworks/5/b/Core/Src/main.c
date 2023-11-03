@@ -127,7 +127,7 @@ int main(void)
 
 	// Once the samples have been all collected it is mandatory to stop the timer
 	// to avoid interrupts
-	HAL_TIM_Base_Start_IT(&htim2);
+	HAL_TIM_Base_Stop_IT(&htim2);
 
 	// Mean the results
 	float mean = 0;

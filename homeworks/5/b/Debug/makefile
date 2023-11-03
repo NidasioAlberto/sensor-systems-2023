@@ -60,8 +60,8 @@ all: main-build
 main-build: b.elf secondary-outputs
 
 # Tool invocations
-b.elf b.map: $(OBJS) $(USER_OBJS) /home/matteo/STM32CubeIDE/workspace_1.13.2/b/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "b.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/matteo/STM32CubeIDE/workspace_1.13.2/b/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="b.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+b.elf b.map: $(OBJS) $(USER_OBJS) /home/matteo/Scrivania/UNI/SensorSystems/sensor-systems-2023/homeworks/5/b/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "b.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/matteo/Scrivania/UNI/SensorSystems/sensor-systems-2023/homeworks/5/b/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="b.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
