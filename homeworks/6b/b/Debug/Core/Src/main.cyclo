@@ -1,0 +1,8 @@
+../Core/Src/main.c:85:9:readRegister	1
+../Core/Src/main.c:98:6:writeRegister	1
+../Core/Src/main.c:112:5:main	2
+../Core/Src/main.c:225:6:SystemClock_Config	3
+../Core/Src/main.c:272:13:MX_I2C1_Init	2
+../Core/Src/main.c:306:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:339:13:MX_GPIO_Init	1
+../Core/Src/main.c:379:6:Error_Handler	1
