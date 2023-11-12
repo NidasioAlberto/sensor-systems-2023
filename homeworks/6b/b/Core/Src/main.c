@@ -442,7 +442,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	data = readRegister(OUT_Z);
 	Z = ((int8_t)data) * SENSITIVITY;
 
-	sprintf(printBuffer, "Data: %.2f %.2f %.2f\r\n", X, Y, Z);
+	sprintf(printBuffer, "X: %.2f g\n\rY: %.2f g\n\rZ: %.2f g\r\n", X, Y, Z);
 	HAL_UART_Transmit_DMA(&huart2, (uint8_t *) printBuffer, strlen(printBuffer));
 
 	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);

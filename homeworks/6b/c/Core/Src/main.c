@@ -440,7 +440,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void HAL_I2C_MasterRxCpltCallback (I2C_HandleTypeDef * hi2c)
 {
 	char printBuffer[100];
-	sprintf(printBuffer, "Data: %.2f %.2f %.2f\r\n", ((int8_t)i2cData[0]) * SENSITIVITY, ((int8_t)i2cData[2]) * SENSITIVITY,((int8_t)i2cData[4]) * SENSITIVITY);
+	sprintf(printBuffer, "X: %.2f g\n\rY: %.2f g\n\rZ: %.2f g\r\n", ((int8_t)i2cData[0]) * SENSITIVITY, ((int8_t)i2cData[2]) * SENSITIVITY,((int8_t)i2cData[4]) * SENSITIVITY);
 	HAL_UART_Transmit_DMA(&huart2, (uint8_t *) printBuffer, strlen(printBuffer));
 
 	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
