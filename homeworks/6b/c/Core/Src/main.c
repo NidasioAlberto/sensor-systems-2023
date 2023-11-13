@@ -63,6 +63,7 @@ uint8_t CTRL_REG4 = 0x23;
 uint8_t OUT_X = 0xA9;
 uint8_t OUT_Y = 0x2b;
 uint8_t OUT_Z = 0x2d;
+uint8_t AUTO_INCREMENT = 0x80;
 
 // Constants
 const uint16_t MAX_SAMPLING_VALUE = 256;
@@ -431,8 +432,11 @@ uint8_t i2cData[5];
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+	uint8_t TEMP;
 
-	HAL_I2C_Master_Transmit(&hi2c1, address, &OUT_X, 1, HAL_MAX_DELAY);
+	TEMP = OUT_X | AUTO_INCREMENT;
+
+	HAL_I2C_Master_Transmit(&hi2c1, address, &TEMP, 1, HAL_MAX_DELAY);
 
 	HAL_I2C_Master_Receive_DMA(&hi2c1, address, i2cData,sizeof(i2cData));
 
@@ -440,9 +444,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void HAL_I2C_MasterRxCpltCallback (I2C_HandleTypeDef * hi2c)
 {
 	char printBuffer[100];
+
 	sprintf(printBuffer, "X: %.2f g\n\rY: %.2f g\n\rZ: %.2f g\r\n", ((int8_t)i2cData[0]) * SENSITIVITY, ((int8_t)i2cData[2]) * SENSITIVITY,((int8_t)i2cData[4]) * SENSITIVITY);
 	HAL_UART_Transmit_DMA(&huart2, (uint8_t *) printBuffer, strlen(printBuffer));
 
+	//Toggle pin for debug
 	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 }
 
