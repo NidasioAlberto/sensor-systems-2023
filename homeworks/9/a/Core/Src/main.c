@@ -47,7 +47,7 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 uint16_t rows[] = {GPIO_PIN_3, GPIO_PIN_2, GPIO_PIN_13, GPIO_PIN_12};
 uint16_t cols[] = {GPIO_PIN_11, GPIO_PIN_10, GPIO_PIN_9, GPIO_PIN_8};
-char vals[] = {'F', 'E', 'D', 'C', 'B', 'A', '9', '8', '7', '6', '5', '4', '3', '2', '1', '0'};
+char vals[] = {'F', 'B', '7', '3', 'E', 'A', '6', '2', 'D', '9', '5', '1', 'C', '8', '4', '0'};
 uint8_t keys[16];
 uint8_t ack[16];
 
@@ -108,6 +108,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	for (int i = 0; i < 16; i++) {
+		if (keys[i] == 1) {
+			if (ack[i] == 0) {
+				len = sprintf(buffer, "%c\n\r", vals[i]);
+				HAL_UART_Transmit(&huart2, (const uint8_t *) buffer, len, HAL_MAX_DELAY);
+				ack[i] = 1;
+			}
+		} else
+			ack[i] = 0;
+	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -182,7 +192,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 8400-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 1000-1;
+  htim2.Init.Period = 50-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -289,10 +299,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	HAL_GPIO_WritePin(GPIOC, cols[col_idx], GPIO_PIN_RESET);
-	if(++col_idx > 3)
-		col_idx = 0;
-
 	for(int row_idx = 0; row_idx < 4; row_idx++)
 	{
 		GPIO_PinState rowState = HAL_GPIO_ReadPin(GPIOC, rows[row_idx]);
@@ -300,17 +306,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		keys[4*col_idx+row_idx] = (rowState == GPIO_PIN_RESET)?1:0;
 	}
 
-	for (int i = 0; i < 16; i++) {
-		if (keys[i] == 1) {
-			if (ack[i] == 0) {
-				len = sprintf(buffer, "%c\n\r", vals[i]);
-				HAL_UART_Transmit(&huart2, (const uint8_t *) buffer, len, HAL_MAX_DELAY);
-				ack[i] = 1;
-			}
-		} else
-			ack[i] = 0;
-	}
-
+	HAL_GPIO_WritePin(GPIOC, cols[col_idx], GPIO_PIN_RESET);
+	if(++col_idx > 3)
+		col_idx = 0;
 	HAL_GPIO_WritePin(GPIOC, cols[col_idx], GPIO_PIN_SET);
 }
 /* USER CODE END 4 */
