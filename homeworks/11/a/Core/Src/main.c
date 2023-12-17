@@ -758,14 +758,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     // IR link transmission interrupt
     else if (htim == &htim4)
     {
-        char buffer[100] = {0};
-
         if (ir_ctrl.current_byte >= 0 && ir_ctrl.current_byte < ir_ctrl.buffer_length)
         {
-            // char buffer[100] = {0};
-            // sprintf(buffer, "%d-%d\n\r\r", ir_ctrl.current_byte, ir_ctrl.next_bit);
-            // HAL_UART_Transmit(&huart2, buffer, 6, -1);
-
             if (ir_ctrl.next_bit == -1)
             {
                 // Send the start bit (low)
