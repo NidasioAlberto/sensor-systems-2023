@@ -60,8 +60,8 @@ all: main-build
 main-build: a.elf secondary-outputs
 
 # Tool invocations
-a.elf a.map: $(OBJS) $(USER_OBJS) /home/alberton/Documents/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "a.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/alberton/Documents/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="a.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+a.elf a.map: $(OBJS) $(USER_OBJS) /Users/alberton/Documents/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "a.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/alberton/Documents/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="a.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

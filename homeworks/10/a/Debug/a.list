@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  0002004c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0000cdc3  00000000  00000000  0002008f  2**0
+ 13 .debug_info   0000cdc9  00000000  00000000  0002008f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00001bf5  00000000  00000000  0002ce52  2**0
+ 14 .debug_abbrev 00001c10  00000000  00000000  0002ce58  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000c50  00000000  00000000  0002ea48  2**3
+ 15 .debug_aranges 00000c50  00000000  00000000  0002ea68  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 000009ad  00000000  00000000  0002f698  2**0
+ 16 .debug_rnglists 000009ad  00000000  00000000  0002f6b8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00015676  00000000  00000000  00030045  2**0
+ 17 .debug_macro  00015676  00000000  00000000  00030065  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000d279  00000000  00000000  000456bb  2**0
+ 18 .debug_line   0000d649  00000000  00000000  000456db  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00089bf2  00000000  00000000  00052934  2**0
+ 19 .debug_str    00089bf5  00000000  00000000  00052d24  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  0000340c  00000000  00000000  000dc528  2**2
+ 20 .debug_frame  0000340c  00000000  00000000  000dc91c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000006a  00000000  00000000  000df934  2**0
+ 21 .debug_line_str 0000006b  00000000  00000000  000dfd28  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -351,932 +351,951 @@ Disassembly of section .text:
  80004cc:	4770      	bx	lr
  80004ce:	bf00      	nop
 
-080004d0 <HAL_TIM_PeriodElapsedCallback>:
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+080004d0 <main>:
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
  80004d0:	b580      	push	{r7, lr}
- 80004d2:	b082      	sub	sp, #8
- 80004d4:	af00      	add	r7, sp, #0
- 80004d6:	6078      	str	r0, [r7, #4]
-	if (htim == &htim3) {
- 80004d8:	687b      	ldr	r3, [r7, #4]
- 80004da:	4a2e      	ldr	r2, [pc, #184]	; (8000594 <HAL_TIM_PeriodElapsedCallback+0xc4>)
- 80004dc:	4293      	cmp	r3, r2
- 80004de:	d154      	bne.n	800058a <HAL_TIM_PeriodElapsedCallback+0xba>
-		if (ir_ctrl.current_byte >= 0
- 80004e0:	4b2d      	ldr	r3, [pc, #180]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 80004e2:	681b      	ldr	r3, [r3, #0]
- 80004e4:	2b00      	cmp	r3, #0
- 80004e6:	db50      	blt.n	800058a <HAL_TIM_PeriodElapsedCallback+0xba>
-				&& ir_ctrl.current_byte < ir_ctrl.buffer_length) {
- 80004e8:	4b2b      	ldr	r3, [pc, #172]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 80004ea:	681a      	ldr	r2, [r3, #0]
- 80004ec:	4b2a      	ldr	r3, [pc, #168]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 80004ee:	68db      	ldr	r3, [r3, #12]
- 80004f0:	429a      	cmp	r2, r3
- 80004f2:	da4a      	bge.n	800058a <HAL_TIM_PeriodElapsedCallback+0xba>
+ 80004d2:	af00      	add	r7, sp, #0
+  /* USER CODE END 1 */
 
-			if (ir_ctrl.next_bit == -1) {
- 80004f4:	4b28      	ldr	r3, [pc, #160]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 80004f6:	685b      	ldr	r3, [r3, #4]
- 80004f8:	f1b3 3fff 	cmp.w	r3, #4294967295	; 0xffffffff
- 80004fc:	d109      	bne.n	8000512 <HAL_TIM_PeriodElapsedCallback+0x42>
-				// Send the start bit
-				HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
- 80004fe:	2108      	movs	r1, #8
- 8000500:	4826      	ldr	r0, [pc, #152]	; (800059c <HAL_TIM_PeriodElapsedCallback+0xcc>)
- 8000502:	f001 fdc9 	bl	8002098 <HAL_TIM_PWM_Start>
-				ir_ctrl.next_bit++;
- 8000506:	4b24      	ldr	r3, [pc, #144]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000508:	685b      	ldr	r3, [r3, #4]
- 800050a:	3301      	adds	r3, #1
- 800050c:	4a22      	ldr	r2, [pc, #136]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 800050e:	6053      	str	r3, [r2, #4]
- 8000510:	e02e      	b.n	8000570 <HAL_TIM_PeriodElapsedCallback+0xa0>
-			} else if (ir_ctrl.next_bit < 8) {
- 8000512:	4b21      	ldr	r3, [pc, #132]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000514:	685b      	ldr	r3, [r3, #4]
- 8000516:	2b07      	cmp	r3, #7
- 8000518:	dc1d      	bgt.n	8000556 <HAL_TIM_PeriodElapsedCallback+0x86>
-				// Send a bit
-				if (ir_ctrl.buffer[ir_ctrl.current_byte] >> ir_ctrl.next_bit
- 800051a:	4b1f      	ldr	r3, [pc, #124]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 800051c:	689b      	ldr	r3, [r3, #8]
- 800051e:	4a1e      	ldr	r2, [pc, #120]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000520:	6812      	ldr	r2, [r2, #0]
- 8000522:	4413      	add	r3, r2
- 8000524:	781b      	ldrb	r3, [r3, #0]
- 8000526:	461a      	mov	r2, r3
- 8000528:	4b1b      	ldr	r3, [pc, #108]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 800052a:	685b      	ldr	r3, [r3, #4]
- 800052c:	fa42 f303 	asr.w	r3, r2, r3
-						& 0x1) {
- 8000530:	f003 0301 	and.w	r3, r3, #1
-				if (ir_ctrl.buffer[ir_ctrl.current_byte] >> ir_ctrl.next_bit
- 8000534:	2b00      	cmp	r3, #0
- 8000536:	d004      	beq.n	8000542 <HAL_TIM_PeriodElapsedCallback+0x72>
-					// Stop the carrier to send a 1
-					HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_3);
- 8000538:	2108      	movs	r1, #8
- 800053a:	4818      	ldr	r0, [pc, #96]	; (800059c <HAL_TIM_PeriodElapsedCallback+0xcc>)
- 800053c:	f001 fe5c 	bl	80021f8 <HAL_TIM_PWM_Stop>
- 8000540:	e003      	b.n	800054a <HAL_TIM_PeriodElapsedCallback+0x7a>
-				} else {
-					// Start the carrier to send a 0
-					HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
- 8000542:	2108      	movs	r1, #8
- 8000544:	4815      	ldr	r0, [pc, #84]	; (800059c <HAL_TIM_PeriodElapsedCallback+0xcc>)
- 8000546:	f001 fda7 	bl	8002098 <HAL_TIM_PWM_Start>
-				}
-				ir_ctrl.next_bit++;
- 800054a:	4b13      	ldr	r3, [pc, #76]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 800054c:	685b      	ldr	r3, [r3, #4]
- 800054e:	3301      	adds	r3, #1
- 8000550:	4a11      	ldr	r2, [pc, #68]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000552:	6053      	str	r3, [r2, #4]
- 8000554:	e00c      	b.n	8000570 <HAL_TIM_PeriodElapsedCallback+0xa0>
-			} else {
-				// Send the STOP bit
-				HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_3);
- 8000556:	2108      	movs	r1, #8
- 8000558:	4810      	ldr	r0, [pc, #64]	; (800059c <HAL_TIM_PeriodElapsedCallback+0xcc>)
- 800055a:	f001 fe4d 	bl	80021f8 <HAL_TIM_PWM_Stop>
+  /* MCU Configuration--------------------------------------------------------*/
 
-				// Reset the bit and increment the byte
-				ir_ctrl.next_bit = -1;
- 800055e:	4b0e      	ldr	r3, [pc, #56]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000560:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
- 8000564:	605a      	str	r2, [r3, #4]
-				ir_ctrl.current_byte++;
- 8000566:	4b0c      	ldr	r3, [pc, #48]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000568:	681b      	ldr	r3, [r3, #0]
- 800056a:	3301      	adds	r3, #1
- 800056c:	4a0a      	ldr	r2, [pc, #40]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 800056e:	6013      	str	r3, [r2, #0]
-			}
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+ 80004d4:	f000 fc64 	bl	8000da0 <HAL_Init>
+  /* USER CODE BEGIN Init */
 
-			// If we've reached the end of the content we reset the pointer and stop the timer
-			if (ir_ctrl.current_byte == ir_ctrl.buffer_length) {
- 8000570:	4b09      	ldr	r3, [pc, #36]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000572:	681a      	ldr	r2, [r3, #0]
- 8000574:	4b08      	ldr	r3, [pc, #32]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 8000576:	68db      	ldr	r3, [r3, #12]
- 8000578:	429a      	cmp	r2, r3
- 800057a:	d106      	bne.n	800058a <HAL_TIM_PeriodElapsedCallback+0xba>
-				ir_ctrl.current_byte = -1;
- 800057c:	4b06      	ldr	r3, [pc, #24]	; (8000598 <HAL_TIM_PeriodElapsedCallback+0xc8>)
- 800057e:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
- 8000582:	601a      	str	r2, [r3, #0]
-				HAL_TIM_Base_Stop_IT(&htim3);
- 8000584:	4803      	ldr	r0, [pc, #12]	; (8000594 <HAL_TIM_PeriodElapsedCallback+0xc4>)
- 8000586:	f001 fd09 	bl	8001f9c <HAL_TIM_Base_Stop_IT>
-			}
-		}
-	}
-}
- 800058a:	bf00      	nop
- 800058c:	3708      	adds	r7, #8
- 800058e:	46bd      	mov	sp, r7
- 8000590:	bd80      	pop	{r7, pc}
- 8000592:	bf00      	nop
- 8000594:	20000080 	.word	0x20000080
- 8000598:	20000000 	.word	0x20000000
- 800059c:	20000038 	.word	0x20000038
+  /* USER CODE END Init */
 
-080005a0 <sendStringIR>:
+  /* Configure the system clock */
+  SystemClock_Config();
+ 80004d8:	f000 f81e 	bl	8000518 <SystemClock_Config>
+  /* USER CODE BEGIN SysInit */
 
-void sendStringIR(uint8_t *data, int length) {
- 80005a0:	b580      	push	{r7, lr}
- 80005a2:	b082      	sub	sp, #8
- 80005a4:	af00      	add	r7, sp, #0
- 80005a6:	6078      	str	r0, [r7, #4]
- 80005a8:	6039      	str	r1, [r7, #0]
-	ir_ctrl.buffer = data;
- 80005aa:	4a08      	ldr	r2, [pc, #32]	; (80005cc <sendStringIR+0x2c>)
- 80005ac:	687b      	ldr	r3, [r7, #4]
- 80005ae:	6093      	str	r3, [r2, #8]
-	ir_ctrl.buffer_length = length;
- 80005b0:	4a06      	ldr	r2, [pc, #24]	; (80005cc <sendStringIR+0x2c>)
- 80005b2:	683b      	ldr	r3, [r7, #0]
- 80005b4:	60d3      	str	r3, [r2, #12]
-	ir_ctrl.current_byte = 0;
- 80005b6:	4b05      	ldr	r3, [pc, #20]	; (80005cc <sendStringIR+0x2c>)
- 80005b8:	2200      	movs	r2, #0
- 80005ba:	601a      	str	r2, [r3, #0]
+  /* USER CODE END SysInit */
 
-	HAL_TIM_Base_Start_IT(&htim3);
- 80005bc:	4804      	ldr	r0, [pc, #16]	; (80005d0 <sendStringIR+0x30>)
- 80005be:	f001 fc8b 	bl	8001ed8 <HAL_TIM_Base_Start_IT>
-}
- 80005c2:	bf00      	nop
- 80005c4:	3708      	adds	r7, #8
- 80005c6:	46bd      	mov	sp, r7
- 80005c8:	bd80      	pop	{r7, pc}
- 80005ca:	bf00      	nop
- 80005cc:	20000000 	.word	0x20000000
- 80005d0:	20000080 	.word	0x20000080
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+ 80004dc:	f000 f984 	bl	80007e8 <MX_GPIO_Init>
+  MX_USART2_UART_Init();
+ 80004e0:	f000 f958 	bl	8000794 <MX_USART2_UART_Init>
+  MX_TIM2_Init();
+ 80004e4:	f000 f884 	bl	80005f0 <MX_TIM2_Init>
+  MX_USART1_UART_Init();
+ 80004e8:	f000 f92a 	bl	8000740 <MX_USART1_UART_Init>
+  MX_TIM4_Init();
+ 80004ec:	f000 f8da 	bl	80006a4 <MX_TIM4_Init>
+  /* USER CODE BEGIN 2 */
 
-080005d4 <HAL_UART_RxCpltCallback>:
+    // Start receiving the first byte via the IR link
+    HAL_UART_Receive_IT(&huart1, &uart1_buffer, 1);
+ 80004f0:	2201      	movs	r2, #1
+ 80004f2:	4905      	ldr	r1, [pc, #20]	; (8000508 <main+0x38>)
+ 80004f4:	4805      	ldr	r0, [pc, #20]	; (800050c <main+0x3c>)
+ 80004f6:	f002 fdba 	bl	800306e <HAL_UART_Receive_IT>
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
- 80005d4:	b580      	push	{r7, lr}
- 80005d6:	b082      	sub	sp, #8
- 80005d8:	af00      	add	r7, sp, #0
- 80005da:	6078      	str	r0, [r7, #4]
-	if (huart == &huart1) {
- 80005dc:	687b      	ldr	r3, [r7, #4]
- 80005de:	4a10      	ldr	r2, [pc, #64]	; (8000620 <HAL_UART_RxCpltCallback+0x4c>)
- 80005e0:	4293      	cmp	r3, r2
- 80005e2:	d10c      	bne.n	80005fe <HAL_UART_RxCpltCallback+0x2a>
-		// Send what we received from the IR link to the terminal
-		HAL_UART_Transmit(&huart2, &uart1_buffer, 1, -1);
- 80005e4:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
- 80005e8:	2201      	movs	r2, #1
- 80005ea:	490e      	ldr	r1, [pc, #56]	; (8000624 <HAL_UART_RxCpltCallback+0x50>)
- 80005ec:	480e      	ldr	r0, [pc, #56]	; (8000628 <HAL_UART_RxCpltCallback+0x54>)
- 80005ee:	f002 fcb3 	bl	8002f58 <HAL_UART_Transmit>
+    // Start receiving the first byte from the serial terminal
+    HAL_UART_Receive_IT(&huart2, &uart2_buffer, 1);
+ 80004fa:	2201      	movs	r2, #1
+ 80004fc:	4904      	ldr	r1, [pc, #16]	; (8000510 <main+0x40>)
+ 80004fe:	4805      	ldr	r0, [pc, #20]	; (8000514 <main+0x44>)
+ 8000500:	f002 fdb5 	bl	800306e <HAL_UART_Receive_IT>
 
-		// Setup the peripheral to receive another byte
-		HAL_UART_Receive_IT(&huart1, &uart1_buffer, 1);
- 80005f2:	2201      	movs	r2, #1
- 80005f4:	490b      	ldr	r1, [pc, #44]	; (8000624 <HAL_UART_RxCpltCallback+0x50>)
- 80005f6:	480a      	ldr	r0, [pc, #40]	; (8000620 <HAL_UART_RxCpltCallback+0x4c>)
- 80005f8:	f002 fd39 	bl	800306e <HAL_UART_Receive_IT>
-		sendStringIR(&uart2_buffer, 1);
+  /* USER CODE END 2 */
 
-		// Setup the peripheral to receive another byte
-		HAL_UART_Receive_IT(&huart2, &uart2_buffer, 1);
-	}
-}
- 80005fc:	e00c      	b.n	8000618 <HAL_UART_RxCpltCallback+0x44>
-	} else if (huart == &huart2) {
- 80005fe:	687b      	ldr	r3, [r7, #4]
- 8000600:	4a09      	ldr	r2, [pc, #36]	; (8000628 <HAL_UART_RxCpltCallback+0x54>)
- 8000602:	4293      	cmp	r3, r2
- 8000604:	d108      	bne.n	8000618 <HAL_UART_RxCpltCallback+0x44>
-		sendStringIR(&uart2_buffer, 1);
- 8000606:	2101      	movs	r1, #1
- 8000608:	4808      	ldr	r0, [pc, #32]	; (800062c <HAL_UART_RxCpltCallback+0x58>)
- 800060a:	f7ff ffc9 	bl	80005a0 <sendStringIR>
-		HAL_UART_Receive_IT(&huart2, &uart2_buffer, 1);
- 800060e:	2201      	movs	r2, #1
- 8000610:	4906      	ldr	r1, [pc, #24]	; (800062c <HAL_UART_RxCpltCallback+0x58>)
- 8000612:	4805      	ldr	r0, [pc, #20]	; (8000628 <HAL_UART_RxCpltCallback+0x54>)
- 8000614:	f002 fd2b 	bl	800306e <HAL_UART_Receive_IT>
-}
- 8000618:	bf00      	nop
- 800061a:	3708      	adds	r7, #8
- 800061c:	46bd      	mov	sp, r7
- 800061e:	bd80      	pop	{r7, pc}
- 8000620:	200000c8 	.word	0x200000c8
- 8000624:	20000158 	.word	0x20000158
- 8000628:	20000110 	.word	0x20000110
- 800062c:	20000159 	.word	0x20000159
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+    while (1)
+ 8000504:	e7fe      	b.n	8000504 <main+0x34>
+ 8000506:	bf00      	nop
+ 8000508:	20000158 	.word	0x20000158
+ 800050c:	200000c8 	.word	0x200000c8
+ 8000510:	20000159 	.word	0x20000159
+ 8000514:	20000110 	.word	0x20000110
 
-08000630 <main>:
-
+08000518 <SystemClock_Config>:
 /**
- * @brief  The application entry point.
- * @retval int
- */
-int main(void) {
- 8000630:	b580      	push	{r7, lr}
- 8000632:	af00      	add	r7, sp, #0
-	/* USER CODE END 1 */
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+ 8000518:	b580      	push	{r7, lr}
+ 800051a:	b094      	sub	sp, #80	; 0x50
+ 800051c:	af00      	add	r7, sp, #0
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 800051e:	f107 0320 	add.w	r3, r7, #32
+ 8000522:	2230      	movs	r2, #48	; 0x30
+ 8000524:	2100      	movs	r1, #0
+ 8000526:	4618      	mov	r0, r3
+ 8000528:	f003 fd1c 	bl	8003f64 <memset>
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 800052c:	f107 030c 	add.w	r3, r7, #12
+ 8000530:	2200      	movs	r2, #0
+ 8000532:	601a      	str	r2, [r3, #0]
+ 8000534:	605a      	str	r2, [r3, #4]
+ 8000536:	609a      	str	r2, [r3, #8]
+ 8000538:	60da      	str	r2, [r3, #12]
+ 800053a:	611a      	str	r2, [r3, #16]
 
-	/* MCU Configuration--------------------------------------------------------*/
+  /** Configure the main internal regulator output voltage
+  */
+  __HAL_RCC_PWR_CLK_ENABLE();
+ 800053c:	2300      	movs	r3, #0
+ 800053e:	60bb      	str	r3, [r7, #8]
+ 8000540:	4b29      	ldr	r3, [pc, #164]	; (80005e8 <SystemClock_Config+0xd0>)
+ 8000542:	6c1b      	ldr	r3, [r3, #64]	; 0x40
+ 8000544:	4a28      	ldr	r2, [pc, #160]	; (80005e8 <SystemClock_Config+0xd0>)
+ 8000546:	f043 5380 	orr.w	r3, r3, #268435456	; 0x10000000
+ 800054a:	6413      	str	r3, [r2, #64]	; 0x40
+ 800054c:	4b26      	ldr	r3, [pc, #152]	; (80005e8 <SystemClock_Config+0xd0>)
+ 800054e:	6c1b      	ldr	r3, [r3, #64]	; 0x40
+ 8000550:	f003 5380 	and.w	r3, r3, #268435456	; 0x10000000
+ 8000554:	60bb      	str	r3, [r7, #8]
+ 8000556:	68bb      	ldr	r3, [r7, #8]
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+ 8000558:	2300      	movs	r3, #0
+ 800055a:	607b      	str	r3, [r7, #4]
+ 800055c:	4b23      	ldr	r3, [pc, #140]	; (80005ec <SystemClock_Config+0xd4>)
+ 800055e:	681b      	ldr	r3, [r3, #0]
+ 8000560:	f423 4340 	bic.w	r3, r3, #49152	; 0xc000
+ 8000564:	4a21      	ldr	r2, [pc, #132]	; (80005ec <SystemClock_Config+0xd4>)
+ 8000566:	f443 4300 	orr.w	r3, r3, #32768	; 0x8000
+ 800056a:	6013      	str	r3, [r2, #0]
+ 800056c:	4b1f      	ldr	r3, [pc, #124]	; (80005ec <SystemClock_Config+0xd4>)
+ 800056e:	681b      	ldr	r3, [r3, #0]
+ 8000570:	f403 4340 	and.w	r3, r3, #49152	; 0xc000
+ 8000574:	607b      	str	r3, [r7, #4]
+ 8000576:	687b      	ldr	r3, [r7, #4]
 
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
- 8000634:	f000 fbb4 	bl	8000da0 <HAL_Init>
-	/* USER CODE BEGIN Init */
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+ 8000578:	2302      	movs	r3, #2
+ 800057a:	623b      	str	r3, [r7, #32]
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 800057c:	2301      	movs	r3, #1
+ 800057e:	62fb      	str	r3, [r7, #44]	; 0x2c
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+ 8000580:	2310      	movs	r3, #16
+ 8000582:	633b      	str	r3, [r7, #48]	; 0x30
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 8000584:	2302      	movs	r3, #2
+ 8000586:	63bb      	str	r3, [r7, #56]	; 0x38
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+ 8000588:	2300      	movs	r3, #0
+ 800058a:	63fb      	str	r3, [r7, #60]	; 0x3c
+  RCC_OscInitStruct.PLL.PLLM = 16;
+ 800058c:	2310      	movs	r3, #16
+ 800058e:	643b      	str	r3, [r7, #64]	; 0x40
+  RCC_OscInitStruct.PLL.PLLN = 336;
+ 8000590:	f44f 73a8 	mov.w	r3, #336	; 0x150
+ 8000594:	647b      	str	r3, [r7, #68]	; 0x44
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+ 8000596:	2304      	movs	r3, #4
+ 8000598:	64bb      	str	r3, [r7, #72]	; 0x48
+  RCC_OscInitStruct.PLL.PLLQ = 7;
+ 800059a:	2307      	movs	r3, #7
+ 800059c:	64fb      	str	r3, [r7, #76]	; 0x4c
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 800059e:	f107 0320 	add.w	r3, r7, #32
+ 80005a2:	4618      	mov	r0, r3
+ 80005a4:	f000 ffb0 	bl	8001508 <HAL_RCC_OscConfig>
+ 80005a8:	4603      	mov	r3, r0
+ 80005aa:	2b00      	cmp	r3, #0
+ 80005ac:	d001      	beq.n	80005b2 <SystemClock_Config+0x9a>
+  {
+    Error_Handler();
+ 80005ae:	f000 fa39 	bl	8000a24 <Error_Handler>
+  }
 
-	/* USER CODE END Init */
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 80005b2:	230f      	movs	r3, #15
+ 80005b4:	60fb      	str	r3, [r7, #12]
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 80005b6:	2302      	movs	r3, #2
+ 80005b8:	613b      	str	r3, [r7, #16]
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 80005ba:	2300      	movs	r3, #0
+ 80005bc:	617b      	str	r3, [r7, #20]
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 80005be:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+ 80005c2:	61bb      	str	r3, [r7, #24]
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 80005c4:	2300      	movs	r3, #0
+ 80005c6:	61fb      	str	r3, [r7, #28]
 
-	/* Configure the system clock */
-	SystemClock_Config();
- 8000638:	f000 f81e 	bl	8000678 <SystemClock_Config>
-	/* USER CODE BEGIN SysInit */
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+ 80005c8:	f107 030c 	add.w	r3, r7, #12
+ 80005cc:	2102      	movs	r1, #2
+ 80005ce:	4618      	mov	r0, r3
+ 80005d0:	f001 fa12 	bl	80019f8 <HAL_RCC_ClockConfig>
+ 80005d4:	4603      	mov	r3, r0
+ 80005d6:	2b00      	cmp	r3, #0
+ 80005d8:	d001      	beq.n	80005de <SystemClock_Config+0xc6>
+  {
+    Error_Handler();
+ 80005da:	f000 fa23 	bl	8000a24 <Error_Handler>
+  }
+}
+ 80005de:	bf00      	nop
+ 80005e0:	3750      	adds	r7, #80	; 0x50
+ 80005e2:	46bd      	mov	sp, r7
+ 80005e4:	bd80      	pop	{r7, pc}
+ 80005e6:	bf00      	nop
+ 80005e8:	40023800 	.word	0x40023800
+ 80005ec:	40007000 	.word	0x40007000
 
-	/* USER CODE END SysInit */
+080005f0 <MX_TIM2_Init>:
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+ 80005f0:	b580      	push	{r7, lr}
+ 80005f2:	b08a      	sub	sp, #40	; 0x28
+ 80005f4:	af00      	add	r7, sp, #0
 
-	/* Initialize all configured peripherals */
-	MX_GPIO_Init();
- 800063c:	f000 f984 	bl	8000948 <MX_GPIO_Init>
-	MX_USART2_UART_Init();
- 8000640:	f000 f958 	bl	80008f4 <MX_USART2_UART_Init>
-	MX_TIM2_Init();
- 8000644:	f000 f884 	bl	8000750 <MX_TIM2_Init>
-	MX_TIM3_Init();
- 8000648:	f000 f8dc 	bl	8000804 <MX_TIM3_Init>
-	MX_USART1_UART_Init();
- 800064c:	f000 f928 	bl	80008a0 <MX_USART1_UART_Init>
-	/* USER CODE BEGIN 2 */
+  /* USER CODE BEGIN TIM2_Init 0 */
 
-	// Start the reception of bytes from both uarts
-	HAL_UART_Receive_IT(&huart1, &uart1_buffer, 1);
- 8000650:	2201      	movs	r2, #1
- 8000652:	4905      	ldr	r1, [pc, #20]	; (8000668 <main+0x38>)
- 8000654:	4805      	ldr	r0, [pc, #20]	; (800066c <main+0x3c>)
- 8000656:	f002 fd0a 	bl	800306e <HAL_UART_Receive_IT>
-	HAL_UART_Receive_IT(&huart2, &uart2_buffer, 1);
- 800065a:	2201      	movs	r2, #1
- 800065c:	4904      	ldr	r1, [pc, #16]	; (8000670 <main+0x40>)
- 800065e:	4805      	ldr	r0, [pc, #20]	; (8000674 <main+0x44>)
- 8000660:	f002 fd05 	bl	800306e <HAL_UART_Receive_IT>
+  /* USER CODE END TIM2_Init 0 */
 
-	/* USER CODE END 2 */
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+ 80005f6:	f107 0320 	add.w	r3, r7, #32
+ 80005fa:	2200      	movs	r2, #0
+ 80005fc:	601a      	str	r2, [r3, #0]
+ 80005fe:	605a      	str	r2, [r3, #4]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+ 8000600:	1d3b      	adds	r3, r7, #4
+ 8000602:	2200      	movs	r2, #0
+ 8000604:	601a      	str	r2, [r3, #0]
+ 8000606:	605a      	str	r2, [r3, #4]
+ 8000608:	609a      	str	r2, [r3, #8]
+ 800060a:	60da      	str	r2, [r3, #12]
+ 800060c:	611a      	str	r2, [r3, #16]
+ 800060e:	615a      	str	r2, [r3, #20]
+ 8000610:	619a      	str	r2, [r3, #24]
 
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
-	while (1) {
- 8000664:	e7fe      	b.n	8000664 <main+0x34>
- 8000666:	bf00      	nop
- 8000668:	20000158 	.word	0x20000158
- 800066c:	200000c8 	.word	0x200000c8
- 8000670:	20000159 	.word	0x20000159
- 8000674:	20000110 	.word	0x20000110
+  /* USER CODE BEGIN TIM2_Init 1 */
 
-08000678 <SystemClock_Config>:
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+ 8000612:	4b23      	ldr	r3, [pc, #140]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 8000614:	f04f 4280 	mov.w	r2, #1073741824	; 0x40000000
+ 8000618:	601a      	str	r2, [r3, #0]
+  htim2.Init.Prescaler = 0;
+ 800061a:	4b21      	ldr	r3, [pc, #132]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 800061c:	2200      	movs	r2, #0
+ 800061e:	605a      	str	r2, [r3, #4]
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 8000620:	4b1f      	ldr	r3, [pc, #124]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 8000622:	2200      	movs	r2, #0
+ 8000624:	609a      	str	r2, [r3, #8]
+  htim2.Init.Period = 2210;
+ 8000626:	4b1e      	ldr	r3, [pc, #120]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 8000628:	f640 02a2 	movw	r2, #2210	; 0x8a2
+ 800062c:	60da      	str	r2, [r3, #12]
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 800062e:	4b1c      	ldr	r3, [pc, #112]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 8000630:	2200      	movs	r2, #0
+ 8000632:	611a      	str	r2, [r3, #16]
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 8000634:	4b1a      	ldr	r3, [pc, #104]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 8000636:	2200      	movs	r2, #0
+ 8000638:	619a      	str	r2, [r3, #24]
+  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+ 800063a:	4819      	ldr	r0, [pc, #100]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 800063c:	f001 fcdd 	bl	8001ffa <HAL_TIM_PWM_Init>
+ 8000640:	4603      	mov	r3, r0
+ 8000642:	2b00      	cmp	r3, #0
+ 8000644:	d001      	beq.n	800064a <MX_TIM2_Init+0x5a>
+  {
+    Error_Handler();
+ 8000646:	f000 f9ed 	bl	8000a24 <Error_Handler>
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+ 800064a:	2300      	movs	r3, #0
+ 800064c:	623b      	str	r3, [r7, #32]
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 800064e:	2300      	movs	r3, #0
+ 8000650:	627b      	str	r3, [r7, #36]	; 0x24
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+ 8000652:	f107 0320 	add.w	r3, r7, #32
+ 8000656:	4619      	mov	r1, r3
+ 8000658:	4811      	ldr	r0, [pc, #68]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 800065a:	f002 fbab 	bl	8002db4 <HAL_TIMEx_MasterConfigSynchronization>
+ 800065e:	4603      	mov	r3, r0
+ 8000660:	2b00      	cmp	r3, #0
+ 8000662:	d001      	beq.n	8000668 <MX_TIM2_Init+0x78>
+  {
+    Error_Handler();
+ 8000664:	f000 f9de 	bl	8000a24 <Error_Handler>
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+ 8000668:	2360      	movs	r3, #96	; 0x60
+ 800066a:	607b      	str	r3, [r7, #4]
+  sConfigOC.Pulse = 1105;
+ 800066c:	f240 4351 	movw	r3, #1105	; 0x451
+ 8000670:	60bb      	str	r3, [r7, #8]
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+ 8000672:	2300      	movs	r3, #0
+ 8000674:	60fb      	str	r3, [r7, #12]
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+ 8000676:	2300      	movs	r3, #0
+ 8000678:	617b      	str	r3, [r7, #20]
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+ 800067a:	1d3b      	adds	r3, r7, #4
+ 800067c:	2208      	movs	r2, #8
+ 800067e:	4619      	mov	r1, r3
+ 8000680:	4807      	ldr	r0, [pc, #28]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 8000682:	f001 ff0d 	bl	80024a0 <HAL_TIM_PWM_ConfigChannel>
+ 8000686:	4603      	mov	r3, r0
+ 8000688:	2b00      	cmp	r3, #0
+ 800068a:	d001      	beq.n	8000690 <MX_TIM2_Init+0xa0>
+  {
+    Error_Handler();
+ 800068c:	f000 f9ca 	bl	8000a24 <Error_Handler>
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
 
-/**
- * @brief System Clock Configuration
- * @retval None
- */
-void SystemClock_Config(void) {
- 8000678:	b580      	push	{r7, lr}
- 800067a:	b094      	sub	sp, #80	; 0x50
- 800067c:	af00      	add	r7, sp, #0
-	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
- 800067e:	f107 0320 	add.w	r3, r7, #32
- 8000682:	2230      	movs	r2, #48	; 0x30
- 8000684:	2100      	movs	r1, #0
- 8000686:	4618      	mov	r0, r3
- 8000688:	f003 fc6c 	bl	8003f64 <memset>
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
- 800068c:	f107 030c 	add.w	r3, r7, #12
- 8000690:	2200      	movs	r2, #0
- 8000692:	601a      	str	r2, [r3, #0]
- 8000694:	605a      	str	r2, [r3, #4]
- 8000696:	609a      	str	r2, [r3, #8]
- 8000698:	60da      	str	r2, [r3, #12]
- 800069a:	611a      	str	r2, [r3, #16]
+  /* USER CODE END TIM2_Init 2 */
+  HAL_TIM_MspPostInit(&htim2);
+ 8000690:	4803      	ldr	r0, [pc, #12]	; (80006a0 <MX_TIM2_Init+0xb0>)
+ 8000692:	f000 fa3d 	bl	8000b10 <HAL_TIM_MspPostInit>
 
-	/** Configure the main internal regulator output voltage
-	 */
-	__HAL_RCC_PWR_CLK_ENABLE();
- 800069c:	2300      	movs	r3, #0
- 800069e:	60bb      	str	r3, [r7, #8]
- 80006a0:	4b29      	ldr	r3, [pc, #164]	; (8000748 <SystemClock_Config+0xd0>)
- 80006a2:	6c1b      	ldr	r3, [r3, #64]	; 0x40
- 80006a4:	4a28      	ldr	r2, [pc, #160]	; (8000748 <SystemClock_Config+0xd0>)
- 80006a6:	f043 5380 	orr.w	r3, r3, #268435456	; 0x10000000
- 80006aa:	6413      	str	r3, [r2, #64]	; 0x40
- 80006ac:	4b26      	ldr	r3, [pc, #152]	; (8000748 <SystemClock_Config+0xd0>)
- 80006ae:	6c1b      	ldr	r3, [r3, #64]	; 0x40
- 80006b0:	f003 5380 	and.w	r3, r3, #268435456	; 0x10000000
- 80006b4:	60bb      	str	r3, [r7, #8]
- 80006b6:	68bb      	ldr	r3, [r7, #8]
-	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
- 80006b8:	2300      	movs	r3, #0
- 80006ba:	607b      	str	r3, [r7, #4]
- 80006bc:	4b23      	ldr	r3, [pc, #140]	; (800074c <SystemClock_Config+0xd4>)
- 80006be:	681b      	ldr	r3, [r3, #0]
- 80006c0:	f423 4340 	bic.w	r3, r3, #49152	; 0xc000
- 80006c4:	4a21      	ldr	r2, [pc, #132]	; (800074c <SystemClock_Config+0xd4>)
- 80006c6:	f443 4300 	orr.w	r3, r3, #32768	; 0x8000
- 80006ca:	6013      	str	r3, [r2, #0]
- 80006cc:	4b1f      	ldr	r3, [pc, #124]	; (800074c <SystemClock_Config+0xd4>)
- 80006ce:	681b      	ldr	r3, [r3, #0]
- 80006d0:	f403 4340 	and.w	r3, r3, #49152	; 0xc000
- 80006d4:	607b      	str	r3, [r7, #4]
- 80006d6:	687b      	ldr	r3, [r7, #4]
+}
+ 8000696:	bf00      	nop
+ 8000698:	3728      	adds	r7, #40	; 0x28
+ 800069a:	46bd      	mov	sp, r7
+ 800069c:	bd80      	pop	{r7, pc}
+ 800069e:	bf00      	nop
+ 80006a0:	20000038 	.word	0x20000038
 
-	/** Initializes the RCC Oscillators according to the specified parameters
-	 * in the RCC_OscInitTypeDef structure.
-	 */
-	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
- 80006d8:	2302      	movs	r3, #2
- 80006da:	623b      	str	r3, [r7, #32]
-	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 80006dc:	2301      	movs	r3, #1
- 80006de:	62fb      	str	r3, [r7, #44]	; 0x2c
-	RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
- 80006e0:	2310      	movs	r3, #16
- 80006e2:	633b      	str	r3, [r7, #48]	; 0x30
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 80006e4:	2302      	movs	r3, #2
- 80006e6:	63bb      	str	r3, [r7, #56]	; 0x38
-	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
- 80006e8:	2300      	movs	r3, #0
- 80006ea:	63fb      	str	r3, [r7, #60]	; 0x3c
-	RCC_OscInitStruct.PLL.PLLM = 16;
- 80006ec:	2310      	movs	r3, #16
- 80006ee:	643b      	str	r3, [r7, #64]	; 0x40
-	RCC_OscInitStruct.PLL.PLLN = 336;
- 80006f0:	f44f 73a8 	mov.w	r3, #336	; 0x150
- 80006f4:	647b      	str	r3, [r7, #68]	; 0x44
-	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
- 80006f6:	2304      	movs	r3, #4
- 80006f8:	64bb      	str	r3, [r7, #72]	; 0x48
-	RCC_OscInitStruct.PLL.PLLQ = 7;
- 80006fa:	2307      	movs	r3, #7
- 80006fc:	64fb      	str	r3, [r7, #76]	; 0x4c
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
- 80006fe:	f107 0320 	add.w	r3, r7, #32
- 8000702:	4618      	mov	r0, r3
- 8000704:	f000 ff00 	bl	8001508 <HAL_RCC_OscConfig>
+080006a4 <MX_TIM4_Init>:
+  * @brief TIM4 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM4_Init(void)
+{
+ 80006a4:	b580      	push	{r7, lr}
+ 80006a6:	b086      	sub	sp, #24
+ 80006a8:	af00      	add	r7, sp, #0
+
+  /* USER CODE BEGIN TIM4_Init 0 */
+
+  /* USER CODE END TIM4_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+ 80006aa:	f107 0308 	add.w	r3, r7, #8
+ 80006ae:	2200      	movs	r2, #0
+ 80006b0:	601a      	str	r2, [r3, #0]
+ 80006b2:	605a      	str	r2, [r3, #4]
+ 80006b4:	609a      	str	r2, [r3, #8]
+ 80006b6:	60da      	str	r2, [r3, #12]
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+ 80006b8:	463b      	mov	r3, r7
+ 80006ba:	2200      	movs	r2, #0
+ 80006bc:	601a      	str	r2, [r3, #0]
+ 80006be:	605a      	str	r2, [r3, #4]
+
+  /* USER CODE BEGIN TIM4_Init 1 */
+
+  /* USER CODE END TIM4_Init 1 */
+  htim4.Instance = TIM4;
+ 80006c0:	4b1d      	ldr	r3, [pc, #116]	; (8000738 <MX_TIM4_Init+0x94>)
+ 80006c2:	4a1e      	ldr	r2, [pc, #120]	; (800073c <MX_TIM4_Init+0x98>)
+ 80006c4:	601a      	str	r2, [r3, #0]
+  htim4.Init.Prescaler = 0;
+ 80006c6:	4b1c      	ldr	r3, [pc, #112]	; (8000738 <MX_TIM4_Init+0x94>)
+ 80006c8:	2200      	movs	r2, #0
+ 80006ca:	605a      	str	r2, [r3, #4]
+  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 80006cc:	4b1a      	ldr	r3, [pc, #104]	; (8000738 <MX_TIM4_Init+0x94>)
+ 80006ce:	2200      	movs	r2, #0
+ 80006d0:	609a      	str	r2, [r3, #8]
+  htim4.Init.Period = 22100;
+ 80006d2:	4b19      	ldr	r3, [pc, #100]	; (8000738 <MX_TIM4_Init+0x94>)
+ 80006d4:	f245 6254 	movw	r2, #22100	; 0x5654
+ 80006d8:	60da      	str	r2, [r3, #12]
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 80006da:	4b17      	ldr	r3, [pc, #92]	; (8000738 <MX_TIM4_Init+0x94>)
+ 80006dc:	2200      	movs	r2, #0
+ 80006de:	611a      	str	r2, [r3, #16]
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 80006e0:	4b15      	ldr	r3, [pc, #84]	; (8000738 <MX_TIM4_Init+0x94>)
+ 80006e2:	2200      	movs	r2, #0
+ 80006e4:	619a      	str	r2, [r3, #24]
+  if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
+ 80006e6:	4814      	ldr	r0, [pc, #80]	; (8000738 <MX_TIM4_Init+0x94>)
+ 80006e8:	f001 fba6 	bl	8001e38 <HAL_TIM_Base_Init>
+ 80006ec:	4603      	mov	r3, r0
+ 80006ee:	2b00      	cmp	r3, #0
+ 80006f0:	d001      	beq.n	80006f6 <MX_TIM4_Init+0x52>
+  {
+    Error_Handler();
+ 80006f2:	f000 f997 	bl	8000a24 <Error_Handler>
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+ 80006f6:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+ 80006fa:	60bb      	str	r3, [r7, #8]
+  if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK)
+ 80006fc:	f107 0308 	add.w	r3, r7, #8
+ 8000700:	4619      	mov	r1, r3
+ 8000702:	480d      	ldr	r0, [pc, #52]	; (8000738 <MX_TIM4_Init+0x94>)
+ 8000704:	f001 ff8e 	bl	8002624 <HAL_TIM_ConfigClockSource>
  8000708:	4603      	mov	r3, r0
  800070a:	2b00      	cmp	r3, #0
- 800070c:	d001      	beq.n	8000712 <SystemClock_Config+0x9a>
-		Error_Handler();
+ 800070c:	d001      	beq.n	8000712 <MX_TIM4_Init+0x6e>
+  {
+    Error_Handler();
  800070e:	f000 f989 	bl	8000a24 <Error_Handler>
-	}
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+ 8000712:	2300      	movs	r3, #0
+ 8000714:	603b      	str	r3, [r7, #0]
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 8000716:	2300      	movs	r3, #0
+ 8000718:	607b      	str	r3, [r7, #4]
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+ 800071a:	463b      	mov	r3, r7
+ 800071c:	4619      	mov	r1, r3
+ 800071e:	4806      	ldr	r0, [pc, #24]	; (8000738 <MX_TIM4_Init+0x94>)
+ 8000720:	f002 fb48 	bl	8002db4 <HAL_TIMEx_MasterConfigSynchronization>
+ 8000724:	4603      	mov	r3, r0
+ 8000726:	2b00      	cmp	r3, #0
+ 8000728:	d001      	beq.n	800072e <MX_TIM4_Init+0x8a>
+  {
+    Error_Handler();
+ 800072a:	f000 f97b 	bl	8000a24 <Error_Handler>
+  }
+  /* USER CODE BEGIN TIM4_Init 2 */
 
-	/** Initializes the CPU, AHB and APB buses clocks
-	 */
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
- 8000712:	230f      	movs	r3, #15
- 8000714:	60fb      	str	r3, [r7, #12]
-			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
-	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 8000716:	2302      	movs	r3, #2
- 8000718:	613b      	str	r3, [r7, #16]
-	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 800071a:	2300      	movs	r3, #0
- 800071c:	617b      	str	r3, [r7, #20]
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
- 800071e:	f44f 5380 	mov.w	r3, #4096	; 0x1000
- 8000722:	61bb      	str	r3, [r7, #24]
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 8000724:	2300      	movs	r3, #0
- 8000726:	61fb      	str	r3, [r7, #28]
+  /* USER CODE END TIM4_Init 2 */
 
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
- 8000728:	f107 030c 	add.w	r3, r7, #12
- 800072c:	2102      	movs	r1, #2
- 800072e:	4618      	mov	r0, r3
- 8000730:	f001 f962 	bl	80019f8 <HAL_RCC_ClockConfig>
- 8000734:	4603      	mov	r3, r0
- 8000736:	2b00      	cmp	r3, #0
- 8000738:	d001      	beq.n	800073e <SystemClock_Config+0xc6>
-		Error_Handler();
- 800073a:	f000 f973 	bl	8000a24 <Error_Handler>
-	}
 }
- 800073e:	bf00      	nop
- 8000740:	3750      	adds	r7, #80	; 0x50
- 8000742:	46bd      	mov	sp, r7
- 8000744:	bd80      	pop	{r7, pc}
- 8000746:	bf00      	nop
- 8000748:	40023800 	.word	0x40023800
- 800074c:	40007000 	.word	0x40007000
+ 800072e:	bf00      	nop
+ 8000730:	3718      	adds	r7, #24
+ 8000732:	46bd      	mov	sp, r7
+ 8000734:	bd80      	pop	{r7, pc}
+ 8000736:	bf00      	nop
+ 8000738:	20000080 	.word	0x20000080
+ 800073c:	40000800 	.word	0x40000800
 
-08000750 <MX_TIM2_Init>:
-/**
- * @brief TIM2 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_TIM2_Init(void) {
- 8000750:	b580      	push	{r7, lr}
- 8000752:	b08a      	sub	sp, #40	; 0x28
- 8000754:	af00      	add	r7, sp, #0
+08000740 <MX_USART1_UART_Init>:
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+ 8000740:	b580      	push	{r7, lr}
+ 8000742:	af00      	add	r7, sp, #0
+  /* USER CODE END USART1_Init 0 */
 
-	/* USER CODE BEGIN TIM2_Init 0 */
+  /* USER CODE BEGIN USART1_Init 1 */
 
-	/* USER CODE END TIM2_Init 0 */
-
-	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
- 8000756:	f107 0320 	add.w	r3, r7, #32
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+ 8000744:	4b11      	ldr	r3, [pc, #68]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 8000746:	4a12      	ldr	r2, [pc, #72]	; (8000790 <MX_USART1_UART_Init+0x50>)
+ 8000748:	601a      	str	r2, [r3, #0]
+  huart1.Init.BaudRate = 2000;
+ 800074a:	4b10      	ldr	r3, [pc, #64]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 800074c:	f44f 62fa 	mov.w	r2, #2000	; 0x7d0
+ 8000750:	605a      	str	r2, [r3, #4]
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+ 8000752:	4b0e      	ldr	r3, [pc, #56]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 8000754:	2200      	movs	r2, #0
+ 8000756:	609a      	str	r2, [r3, #8]
+  huart1.Init.StopBits = UART_STOPBITS_1;
+ 8000758:	4b0c      	ldr	r3, [pc, #48]	; (800078c <MX_USART1_UART_Init+0x4c>)
  800075a:	2200      	movs	r2, #0
- 800075c:	601a      	str	r2, [r3, #0]
- 800075e:	605a      	str	r2, [r3, #4]
-	TIM_OC_InitTypeDef sConfigOC = { 0 };
- 8000760:	1d3b      	adds	r3, r7, #4
- 8000762:	2200      	movs	r2, #0
- 8000764:	601a      	str	r2, [r3, #0]
- 8000766:	605a      	str	r2, [r3, #4]
- 8000768:	609a      	str	r2, [r3, #8]
- 800076a:	60da      	str	r2, [r3, #12]
- 800076c:	611a      	str	r2, [r3, #16]
- 800076e:	615a      	str	r2, [r3, #20]
- 8000770:	619a      	str	r2, [r3, #24]
+ 800075c:	60da      	str	r2, [r3, #12]
+  huart1.Init.Parity = UART_PARITY_NONE;
+ 800075e:	4b0b      	ldr	r3, [pc, #44]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 8000760:	2200      	movs	r2, #0
+ 8000762:	611a      	str	r2, [r3, #16]
+  huart1.Init.Mode = UART_MODE_TX_RX;
+ 8000764:	4b09      	ldr	r3, [pc, #36]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 8000766:	220c      	movs	r2, #12
+ 8000768:	615a      	str	r2, [r3, #20]
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 800076a:	4b08      	ldr	r3, [pc, #32]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 800076c:	2200      	movs	r2, #0
+ 800076e:	619a      	str	r2, [r3, #24]
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+ 8000770:	4b06      	ldr	r3, [pc, #24]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 8000772:	2200      	movs	r2, #0
+ 8000774:	61da      	str	r2, [r3, #28]
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+ 8000776:	4805      	ldr	r0, [pc, #20]	; (800078c <MX_USART1_UART_Init+0x4c>)
+ 8000778:	f002 fb9e 	bl	8002eb8 <HAL_UART_Init>
+ 800077c:	4603      	mov	r3, r0
+ 800077e:	2b00      	cmp	r3, #0
+ 8000780:	d001      	beq.n	8000786 <MX_USART1_UART_Init+0x46>
+  {
+    Error_Handler();
+ 8000782:	f000 f94f 	bl	8000a24 <Error_Handler>
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
 
-	/* USER CODE BEGIN TIM2_Init 1 */
-
-	/* USER CODE END TIM2_Init 1 */
-	htim2.Instance = TIM2;
- 8000772:	4b23      	ldr	r3, [pc, #140]	; (8000800 <MX_TIM2_Init+0xb0>)
- 8000774:	f04f 4280 	mov.w	r2, #1073741824	; 0x40000000
- 8000778:	601a      	str	r2, [r3, #0]
-	htim2.Init.Prescaler = 0;
- 800077a:	4b21      	ldr	r3, [pc, #132]	; (8000800 <MX_TIM2_Init+0xb0>)
- 800077c:	2200      	movs	r2, #0
- 800077e:	605a      	str	r2, [r3, #4]
-	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
- 8000780:	4b1f      	ldr	r3, [pc, #124]	; (8000800 <MX_TIM2_Init+0xb0>)
- 8000782:	2200      	movs	r2, #0
- 8000784:	609a      	str	r2, [r3, #8]
-	htim2.Init.Period = 2210;
- 8000786:	4b1e      	ldr	r3, [pc, #120]	; (8000800 <MX_TIM2_Init+0xb0>)
- 8000788:	f640 02a2 	movw	r2, #2210	; 0x8a2
- 800078c:	60da      	str	r2, [r3, #12]
-	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
- 800078e:	4b1c      	ldr	r3, [pc, #112]	; (8000800 <MX_TIM2_Init+0xb0>)
- 8000790:	2200      	movs	r2, #0
- 8000792:	611a      	str	r2, [r3, #16]
-	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
- 8000794:	4b1a      	ldr	r3, [pc, #104]	; (8000800 <MX_TIM2_Init+0xb0>)
- 8000796:	2200      	movs	r2, #0
- 8000798:	619a      	str	r2, [r3, #24]
-	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK) {
- 800079a:	4819      	ldr	r0, [pc, #100]	; (8000800 <MX_TIM2_Init+0xb0>)
- 800079c:	f001 fc2d 	bl	8001ffa <HAL_TIM_PWM_Init>
- 80007a0:	4603      	mov	r3, r0
- 80007a2:	2b00      	cmp	r3, #0
- 80007a4:	d001      	beq.n	80007aa <MX_TIM2_Init+0x5a>
-		Error_Handler();
- 80007a6:	f000 f93d 	bl	8000a24 <Error_Handler>
-	}
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
- 80007aa:	2300      	movs	r3, #0
- 80007ac:	623b      	str	r3, [r7, #32]
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
- 80007ae:	2300      	movs	r3, #0
- 80007b0:	627b      	str	r3, [r7, #36]	; 0x24
-	if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig)
- 80007b2:	f107 0320 	add.w	r3, r7, #32
- 80007b6:	4619      	mov	r1, r3
- 80007b8:	4811      	ldr	r0, [pc, #68]	; (8000800 <MX_TIM2_Init+0xb0>)
- 80007ba:	f002 fafb 	bl	8002db4 <HAL_TIMEx_MasterConfigSynchronization>
- 80007be:	4603      	mov	r3, r0
- 80007c0:	2b00      	cmp	r3, #0
- 80007c2:	d001      	beq.n	80007c8 <MX_TIM2_Init+0x78>
-			!= HAL_OK) {
-		Error_Handler();
- 80007c4:	f000 f92e 	bl	8000a24 <Error_Handler>
-	}
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
- 80007c8:	2360      	movs	r3, #96	; 0x60
- 80007ca:	607b      	str	r3, [r7, #4]
-	sConfigOC.Pulse = 1105;
- 80007cc:	f240 4351 	movw	r3, #1105	; 0x451
- 80007d0:	60bb      	str	r3, [r7, #8]
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
- 80007d2:	2300      	movs	r3, #0
- 80007d4:	60fb      	str	r3, [r7, #12]
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
- 80007d6:	2300      	movs	r3, #0
- 80007d8:	617b      	str	r3, [r7, #20]
-	if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3)
- 80007da:	1d3b      	adds	r3, r7, #4
- 80007dc:	2208      	movs	r2, #8
- 80007de:	4619      	mov	r1, r3
- 80007e0:	4807      	ldr	r0, [pc, #28]	; (8000800 <MX_TIM2_Init+0xb0>)
- 80007e2:	f001 fe5d 	bl	80024a0 <HAL_TIM_PWM_ConfigChannel>
- 80007e6:	4603      	mov	r3, r0
- 80007e8:	2b00      	cmp	r3, #0
- 80007ea:	d001      	beq.n	80007f0 <MX_TIM2_Init+0xa0>
-			!= HAL_OK) {
-		Error_Handler();
- 80007ec:	f000 f91a 	bl	8000a24 <Error_Handler>
-	}
-	/* USER CODE BEGIN TIM2_Init 2 */
-
-	/* USER CODE END TIM2_Init 2 */
-	HAL_TIM_MspPostInit(&htim2);
- 80007f0:	4803      	ldr	r0, [pc, #12]	; (8000800 <MX_TIM2_Init+0xb0>)
- 80007f2:	f000 f98d 	bl	8000b10 <HAL_TIM_MspPostInit>
+  /* USER CODE END USART1_Init 2 */
 
 }
- 80007f6:	bf00      	nop
- 80007f8:	3728      	adds	r7, #40	; 0x28
- 80007fa:	46bd      	mov	sp, r7
- 80007fc:	bd80      	pop	{r7, pc}
- 80007fe:	bf00      	nop
- 8000800:	20000038 	.word	0x20000038
+ 8000786:	bf00      	nop
+ 8000788:	bd80      	pop	{r7, pc}
+ 800078a:	bf00      	nop
+ 800078c:	200000c8 	.word	0x200000c8
+ 8000790:	40011000 	.word	0x40011000
 
-08000804 <MX_TIM3_Init>:
-/**
- * @brief TIM3 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_TIM3_Init(void) {
- 8000804:	b580      	push	{r7, lr}
- 8000806:	b086      	sub	sp, #24
- 8000808:	af00      	add	r7, sp, #0
+08000794 <MX_USART2_UART_Init>:
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART2_UART_Init(void)
+{
+ 8000794:	b580      	push	{r7, lr}
+ 8000796:	af00      	add	r7, sp, #0
+  /* USER CODE END USART2_Init 0 */
 
-	/* USER CODE BEGIN TIM3_Init 0 */
+  /* USER CODE BEGIN USART2_Init 1 */
 
-	/* USER CODE END TIM3_Init 0 */
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+ 8000798:	4b11      	ldr	r3, [pc, #68]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 800079a:	4a12      	ldr	r2, [pc, #72]	; (80007e4 <MX_USART2_UART_Init+0x50>)
+ 800079c:	601a      	str	r2, [r3, #0]
+  huart2.Init.BaudRate = 115200;
+ 800079e:	4b10      	ldr	r3, [pc, #64]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007a0:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
+ 80007a4:	605a      	str	r2, [r3, #4]
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+ 80007a6:	4b0e      	ldr	r3, [pc, #56]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007a8:	2200      	movs	r2, #0
+ 80007aa:	609a      	str	r2, [r3, #8]
+  huart2.Init.StopBits = UART_STOPBITS_1;
+ 80007ac:	4b0c      	ldr	r3, [pc, #48]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007ae:	2200      	movs	r2, #0
+ 80007b0:	60da      	str	r2, [r3, #12]
+  huart2.Init.Parity = UART_PARITY_NONE;
+ 80007b2:	4b0b      	ldr	r3, [pc, #44]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007b4:	2200      	movs	r2, #0
+ 80007b6:	611a      	str	r2, [r3, #16]
+  huart2.Init.Mode = UART_MODE_TX_RX;
+ 80007b8:	4b09      	ldr	r3, [pc, #36]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007ba:	220c      	movs	r2, #12
+ 80007bc:	615a      	str	r2, [r3, #20]
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 80007be:	4b08      	ldr	r3, [pc, #32]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007c0:	2200      	movs	r2, #0
+ 80007c2:	619a      	str	r2, [r3, #24]
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+ 80007c4:	4b06      	ldr	r3, [pc, #24]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007c6:	2200      	movs	r2, #0
+ 80007c8:	61da      	str	r2, [r3, #28]
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+ 80007ca:	4805      	ldr	r0, [pc, #20]	; (80007e0 <MX_USART2_UART_Init+0x4c>)
+ 80007cc:	f002 fb74 	bl	8002eb8 <HAL_UART_Init>
+ 80007d0:	4603      	mov	r3, r0
+ 80007d2:	2b00      	cmp	r3, #0
+ 80007d4:	d001      	beq.n	80007da <MX_USART2_UART_Init+0x46>
+  {
+    Error_Handler();
+ 80007d6:	f000 f925 	bl	8000a24 <Error_Handler>
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
 
-	TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
- 800080a:	f107 0308 	add.w	r3, r7, #8
- 800080e:	2200      	movs	r2, #0
- 8000810:	601a      	str	r2, [r3, #0]
- 8000812:	605a      	str	r2, [r3, #4]
- 8000814:	609a      	str	r2, [r3, #8]
- 8000816:	60da      	str	r2, [r3, #12]
-	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
- 8000818:	463b      	mov	r3, r7
- 800081a:	2200      	movs	r2, #0
- 800081c:	601a      	str	r2, [r3, #0]
- 800081e:	605a      	str	r2, [r3, #4]
-
-	/* USER CODE BEGIN TIM3_Init 1 */
-
-	/* USER CODE END TIM3_Init 1 */
-	htim3.Instance = TIM3;
- 8000820:	4b1d      	ldr	r3, [pc, #116]	; (8000898 <MX_TIM3_Init+0x94>)
- 8000822:	4a1e      	ldr	r2, [pc, #120]	; (800089c <MX_TIM3_Init+0x98>)
- 8000824:	601a      	str	r2, [r3, #0]
-	htim3.Init.Prescaler = 0;
- 8000826:	4b1c      	ldr	r3, [pc, #112]	; (8000898 <MX_TIM3_Init+0x94>)
- 8000828:	2200      	movs	r2, #0
- 800082a:	605a      	str	r2, [r3, #4]
-	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
- 800082c:	4b1a      	ldr	r3, [pc, #104]	; (8000898 <MX_TIM3_Init+0x94>)
- 800082e:	2200      	movs	r2, #0
- 8000830:	609a      	str	r2, [r3, #8]
-	htim3.Init.Period = 22100;
- 8000832:	4b19      	ldr	r3, [pc, #100]	; (8000898 <MX_TIM3_Init+0x94>)
- 8000834:	f245 6254 	movw	r2, #22100	; 0x5654
- 8000838:	60da      	str	r2, [r3, #12]
-	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
- 800083a:	4b17      	ldr	r3, [pc, #92]	; (8000898 <MX_TIM3_Init+0x94>)
- 800083c:	2200      	movs	r2, #0
- 800083e:	611a      	str	r2, [r3, #16]
-	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
- 8000840:	4b15      	ldr	r3, [pc, #84]	; (8000898 <MX_TIM3_Init+0x94>)
- 8000842:	2200      	movs	r2, #0
- 8000844:	619a      	str	r2, [r3, #24]
-	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
- 8000846:	4814      	ldr	r0, [pc, #80]	; (8000898 <MX_TIM3_Init+0x94>)
- 8000848:	f001 faf6 	bl	8001e38 <HAL_TIM_Base_Init>
- 800084c:	4603      	mov	r3, r0
- 800084e:	2b00      	cmp	r3, #0
- 8000850:	d001      	beq.n	8000856 <MX_TIM3_Init+0x52>
-		Error_Handler();
- 8000852:	f000 f8e7 	bl	8000a24 <Error_Handler>
-	}
-	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
- 8000856:	f44f 5380 	mov.w	r3, #4096	; 0x1000
- 800085a:	60bb      	str	r3, [r7, #8]
-	if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK) {
- 800085c:	f107 0308 	add.w	r3, r7, #8
- 8000860:	4619      	mov	r1, r3
- 8000862:	480d      	ldr	r0, [pc, #52]	; (8000898 <MX_TIM3_Init+0x94>)
- 8000864:	f001 fede 	bl	8002624 <HAL_TIM_ConfigClockSource>
- 8000868:	4603      	mov	r3, r0
- 800086a:	2b00      	cmp	r3, #0
- 800086c:	d001      	beq.n	8000872 <MX_TIM3_Init+0x6e>
-		Error_Handler();
- 800086e:	f000 f8d9 	bl	8000a24 <Error_Handler>
-	}
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
- 8000872:	2300      	movs	r3, #0
- 8000874:	603b      	str	r3, [r7, #0]
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
- 8000876:	2300      	movs	r3, #0
- 8000878:	607b      	str	r3, [r7, #4]
-	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig)
- 800087a:	463b      	mov	r3, r7
- 800087c:	4619      	mov	r1, r3
- 800087e:	4806      	ldr	r0, [pc, #24]	; (8000898 <MX_TIM3_Init+0x94>)
- 8000880:	f002 fa98 	bl	8002db4 <HAL_TIMEx_MasterConfigSynchronization>
- 8000884:	4603      	mov	r3, r0
- 8000886:	2b00      	cmp	r3, #0
- 8000888:	d001      	beq.n	800088e <MX_TIM3_Init+0x8a>
-			!= HAL_OK) {
-		Error_Handler();
- 800088a:	f000 f8cb 	bl	8000a24 <Error_Handler>
-	}
-	/* USER CODE BEGIN TIM3_Init 2 */
-
-	/* USER CODE END TIM3_Init 2 */
+  /* USER CODE END USART2_Init 2 */
 
 }
- 800088e:	bf00      	nop
- 8000890:	3718      	adds	r7, #24
- 8000892:	46bd      	mov	sp, r7
- 8000894:	bd80      	pop	{r7, pc}
- 8000896:	bf00      	nop
- 8000898:	20000080 	.word	0x20000080
- 800089c:	40000400 	.word	0x40000400
+ 80007da:	bf00      	nop
+ 80007dc:	bd80      	pop	{r7, pc}
+ 80007de:	bf00      	nop
+ 80007e0:	20000110 	.word	0x20000110
+ 80007e4:	40004400 	.word	0x40004400
 
-080008a0 <MX_USART1_UART_Init>:
-/**
- * @brief USART1 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_USART1_UART_Init(void) {
- 80008a0:	b580      	push	{r7, lr}
- 80008a2:	af00      	add	r7, sp, #0
-	/* USER CODE END USART1_Init 0 */
+080007e8 <MX_GPIO_Init>:
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+ 80007e8:	b580      	push	{r7, lr}
+ 80007ea:	b08a      	sub	sp, #40	; 0x28
+ 80007ec:	af00      	add	r7, sp, #0
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 80007ee:	f107 0314 	add.w	r3, r7, #20
+ 80007f2:	2200      	movs	r2, #0
+ 80007f4:	601a      	str	r2, [r3, #0]
+ 80007f6:	605a      	str	r2, [r3, #4]
+ 80007f8:	609a      	str	r2, [r3, #8]
+ 80007fa:	60da      	str	r2, [r3, #12]
+ 80007fc:	611a      	str	r2, [r3, #16]
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
 
-	/* USER CODE BEGIN USART1_Init 1 */
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+ 80007fe:	2300      	movs	r3, #0
+ 8000800:	613b      	str	r3, [r7, #16]
+ 8000802:	4b2d      	ldr	r3, [pc, #180]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000804:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000806:	4a2c      	ldr	r2, [pc, #176]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000808:	f043 0304 	orr.w	r3, r3, #4
+ 800080c:	6313      	str	r3, [r2, #48]	; 0x30
+ 800080e:	4b2a      	ldr	r3, [pc, #168]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000810:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000812:	f003 0304 	and.w	r3, r3, #4
+ 8000816:	613b      	str	r3, [r7, #16]
+ 8000818:	693b      	ldr	r3, [r7, #16]
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+ 800081a:	2300      	movs	r3, #0
+ 800081c:	60fb      	str	r3, [r7, #12]
+ 800081e:	4b26      	ldr	r3, [pc, #152]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000820:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000822:	4a25      	ldr	r2, [pc, #148]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000824:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+ 8000828:	6313      	str	r3, [r2, #48]	; 0x30
+ 800082a:	4b23      	ldr	r3, [pc, #140]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 800082c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800082e:	f003 0380 	and.w	r3, r3, #128	; 0x80
+ 8000832:	60fb      	str	r3, [r7, #12]
+ 8000834:	68fb      	ldr	r3, [r7, #12]
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+ 8000836:	2300      	movs	r3, #0
+ 8000838:	60bb      	str	r3, [r7, #8]
+ 800083a:	4b1f      	ldr	r3, [pc, #124]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 800083c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800083e:	4a1e      	ldr	r2, [pc, #120]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000840:	f043 0301 	orr.w	r3, r3, #1
+ 8000844:	6313      	str	r3, [r2, #48]	; 0x30
+ 8000846:	4b1c      	ldr	r3, [pc, #112]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000848:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800084a:	f003 0301 	and.w	r3, r3, #1
+ 800084e:	60bb      	str	r3, [r7, #8]
+ 8000850:	68bb      	ldr	r3, [r7, #8]
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+ 8000852:	2300      	movs	r3, #0
+ 8000854:	607b      	str	r3, [r7, #4]
+ 8000856:	4b18      	ldr	r3, [pc, #96]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000858:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800085a:	4a17      	ldr	r2, [pc, #92]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 800085c:	f043 0302 	orr.w	r3, r3, #2
+ 8000860:	6313      	str	r3, [r2, #48]	; 0x30
+ 8000862:	4b15      	ldr	r3, [pc, #84]	; (80008b8 <MX_GPIO_Init+0xd0>)
+ 8000864:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000866:	f003 0302 	and.w	r3, r3, #2
+ 800086a:	607b      	str	r3, [r7, #4]
+ 800086c:	687b      	ldr	r3, [r7, #4]
 
-	/* USER CODE END USART1_Init 1 */
-	huart1.Instance = USART1;
- 80008a4:	4b11      	ldr	r3, [pc, #68]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008a6:	4a12      	ldr	r2, [pc, #72]	; (80008f0 <MX_USART1_UART_Init+0x50>)
- 80008a8:	601a      	str	r2, [r3, #0]
-	huart1.Init.BaudRate = 3800;
- 80008aa:	4b10      	ldr	r3, [pc, #64]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008ac:	f640 62d8 	movw	r2, #3800	; 0xed8
- 80008b0:	605a      	str	r2, [r3, #4]
-	huart1.Init.WordLength = UART_WORDLENGTH_8B;
- 80008b2:	4b0e      	ldr	r3, [pc, #56]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008b4:	2200      	movs	r2, #0
- 80008b6:	609a      	str	r2, [r3, #8]
-	huart1.Init.StopBits = UART_STOPBITS_1;
- 80008b8:	4b0c      	ldr	r3, [pc, #48]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008ba:	2200      	movs	r2, #0
- 80008bc:	60da      	str	r2, [r3, #12]
-	huart1.Init.Parity = UART_PARITY_NONE;
- 80008be:	4b0b      	ldr	r3, [pc, #44]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008c0:	2200      	movs	r2, #0
- 80008c2:	611a      	str	r2, [r3, #16]
-	huart1.Init.Mode = UART_MODE_TX_RX;
- 80008c4:	4b09      	ldr	r3, [pc, #36]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008c6:	220c      	movs	r2, #12
- 80008c8:	615a      	str	r2, [r3, #20]
-	huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
- 80008ca:	4b08      	ldr	r3, [pc, #32]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008cc:	2200      	movs	r2, #0
- 80008ce:	619a      	str	r2, [r3, #24]
-	huart1.Init.OverSampling = UART_OVERSAMPLING_16;
- 80008d0:	4b06      	ldr	r3, [pc, #24]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008d2:	2200      	movs	r2, #0
- 80008d4:	61da      	str	r2, [r3, #28]
-	if (HAL_UART_Init(&huart1) != HAL_OK) {
- 80008d6:	4805      	ldr	r0, [pc, #20]	; (80008ec <MX_USART1_UART_Init+0x4c>)
- 80008d8:	f002 faee 	bl	8002eb8 <HAL_UART_Init>
- 80008dc:	4603      	mov	r3, r0
- 80008de:	2b00      	cmp	r3, #0
- 80008e0:	d001      	beq.n	80008e6 <MX_USART1_UART_Init+0x46>
-		Error_Handler();
- 80008e2:	f000 f89f 	bl	8000a24 <Error_Handler>
-	}
-	/* USER CODE BEGIN USART1_Init 2 */
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+ 800086e:	2200      	movs	r2, #0
+ 8000870:	2120      	movs	r1, #32
+ 8000872:	4812      	ldr	r0, [pc, #72]	; (80008bc <MX_GPIO_Init+0xd4>)
+ 8000874:	f000 fe2e 	bl	80014d4 <HAL_GPIO_WritePin>
 
-	/* USER CODE END USART1_Init 2 */
+  /*Configure GPIO pin : B1_Pin */
+  GPIO_InitStruct.Pin = B1_Pin;
+ 8000878:	f44f 5300 	mov.w	r3, #8192	; 0x2000
+ 800087c:	617b      	str	r3, [r7, #20]
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+ 800087e:	f44f 1304 	mov.w	r3, #2162688	; 0x210000
+ 8000882:	61bb      	str	r3, [r7, #24]
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 8000884:	2300      	movs	r3, #0
+ 8000886:	61fb      	str	r3, [r7, #28]
+  HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+ 8000888:	f107 0314 	add.w	r3, r7, #20
+ 800088c:	4619      	mov	r1, r3
+ 800088e:	480c      	ldr	r0, [pc, #48]	; (80008c0 <MX_GPIO_Init+0xd8>)
+ 8000890:	f000 fc9c 	bl	80011cc <HAL_GPIO_Init>
 
+  /*Configure GPIO pin : LD2_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin;
+ 8000894:	2320      	movs	r3, #32
+ 8000896:	617b      	str	r3, [r7, #20]
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 8000898:	2301      	movs	r3, #1
+ 800089a:	61bb      	str	r3, [r7, #24]
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 800089c:	2300      	movs	r3, #0
+ 800089e:	61fb      	str	r3, [r7, #28]
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 80008a0:	2300      	movs	r3, #0
+ 80008a2:	623b      	str	r3, [r7, #32]
+  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+ 80008a4:	f107 0314 	add.w	r3, r7, #20
+ 80008a8:	4619      	mov	r1, r3
+ 80008aa:	4804      	ldr	r0, [pc, #16]	; (80008bc <MX_GPIO_Init+0xd4>)
+ 80008ac:	f000 fc8e 	bl	80011cc <HAL_GPIO_Init>
+
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
 }
- 80008e6:	bf00      	nop
- 80008e8:	bd80      	pop	{r7, pc}
- 80008ea:	bf00      	nop
- 80008ec:	200000c8 	.word	0x200000c8
- 80008f0:	40011000 	.word	0x40011000
+ 80008b0:	bf00      	nop
+ 80008b2:	3728      	adds	r7, #40	; 0x28
+ 80008b4:	46bd      	mov	sp, r7
+ 80008b6:	bd80      	pop	{r7, pc}
+ 80008b8:	40023800 	.word	0x40023800
+ 80008bc:	40020000 	.word	0x40020000
+ 80008c0:	40020800 	.word	0x40020800
 
-080008f4 <MX_USART2_UART_Init>:
-/**
- * @brief USART2 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_USART2_UART_Init(void) {
- 80008f4:	b580      	push	{r7, lr}
- 80008f6:	af00      	add	r7, sp, #0
-	/* USER CODE END USART2_Init 0 */
+080008c4 <HAL_TIM_PeriodElapsedCallback>:
 
-	/* USER CODE BEGIN USART2_Init 1 */
+/* USER CODE BEGIN 4 */
 
-	/* USER CODE END USART2_Init 1 */
-	huart2.Instance = USART2;
- 80008f8:	4b11      	ldr	r3, [pc, #68]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 80008fa:	4a12      	ldr	r2, [pc, #72]	; (8000944 <MX_USART2_UART_Init+0x50>)
- 80008fc:	601a      	str	r2, [r3, #0]
-	huart2.Init.BaudRate = 115200;
- 80008fe:	4b10      	ldr	r3, [pc, #64]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 8000900:	f44f 32e1 	mov.w	r2, #115200	; 0x1c200
- 8000904:	605a      	str	r2, [r3, #4]
-	huart2.Init.WordLength = UART_WORDLENGTH_8B;
- 8000906:	4b0e      	ldr	r3, [pc, #56]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 8000908:	2200      	movs	r2, #0
- 800090a:	609a      	str	r2, [r3, #8]
-	huart2.Init.StopBits = UART_STOPBITS_1;
- 800090c:	4b0c      	ldr	r3, [pc, #48]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 800090e:	2200      	movs	r2, #0
- 8000910:	60da      	str	r2, [r3, #12]
-	huart2.Init.Parity = UART_PARITY_NONE;
- 8000912:	4b0b      	ldr	r3, [pc, #44]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 8000914:	2200      	movs	r2, #0
- 8000916:	611a      	str	r2, [r3, #16]
-	huart2.Init.Mode = UART_MODE_TX_RX;
- 8000918:	4b09      	ldr	r3, [pc, #36]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 800091a:	220c      	movs	r2, #12
- 800091c:	615a      	str	r2, [r3, #20]
-	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
- 800091e:	4b08      	ldr	r3, [pc, #32]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 8000920:	2200      	movs	r2, #0
- 8000922:	619a      	str	r2, [r3, #24]
-	huart2.Init.OverSampling = UART_OVERSAMPLING_16;
- 8000924:	4b06      	ldr	r3, [pc, #24]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 8000926:	2200      	movs	r2, #0
- 8000928:	61da      	str	r2, [r3, #28]
-	if (HAL_UART_Init(&huart2) != HAL_OK) {
- 800092a:	4805      	ldr	r0, [pc, #20]	; (8000940 <MX_USART2_UART_Init+0x4c>)
- 800092c:	f002 fac4 	bl	8002eb8 <HAL_UART_Init>
- 8000930:	4603      	mov	r3, r0
- 8000932:	2b00      	cmp	r3, #0
- 8000934:	d001      	beq.n	800093a <MX_USART2_UART_Init+0x46>
-		Error_Handler();
- 8000936:	f000 f875 	bl	8000a24 <Error_Handler>
-	}
-	/* USER CODE BEGIN USART2_Init 2 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+ 80008c4:	b580      	push	{r7, lr}
+ 80008c6:	b082      	sub	sp, #8
+ 80008c8:	af00      	add	r7, sp, #0
+ 80008ca:	6078      	str	r0, [r7, #4]
+    if (htim == &htim4)
+ 80008cc:	687b      	ldr	r3, [r7, #4]
+ 80008ce:	4a2e      	ldr	r2, [pc, #184]	; (8000988 <HAL_TIM_PeriodElapsedCallback+0xc4>)
+ 80008d0:	4293      	cmp	r3, r2
+ 80008d2:	d154      	bne.n	800097e <HAL_TIM_PeriodElapsedCallback+0xba>
+    {
+        if (ir_ctrl.current_byte >= 0 && ir_ctrl.current_byte < ir_ctrl.buffer_length)
+ 80008d4:	4b2d      	ldr	r3, [pc, #180]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 80008d6:	681b      	ldr	r3, [r3, #0]
+ 80008d8:	2b00      	cmp	r3, #0
+ 80008da:	db50      	blt.n	800097e <HAL_TIM_PeriodElapsedCallback+0xba>
+ 80008dc:	4b2b      	ldr	r3, [pc, #172]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 80008de:	681a      	ldr	r2, [r3, #0]
+ 80008e0:	4b2a      	ldr	r3, [pc, #168]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 80008e2:	68db      	ldr	r3, [r3, #12]
+ 80008e4:	429a      	cmp	r2, r3
+ 80008e6:	da4a      	bge.n	800097e <HAL_TIM_PeriodElapsedCallback+0xba>
+        {
 
-	/* USER CODE END USART2_Init 2 */
+            if (ir_ctrl.next_bit == -1)
+ 80008e8:	4b28      	ldr	r3, [pc, #160]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 80008ea:	685b      	ldr	r3, [r3, #4]
+ 80008ec:	f1b3 3fff 	cmp.w	r3, #4294967295	; 0xffffffff
+ 80008f0:	d109      	bne.n	8000906 <HAL_TIM_PeriodElapsedCallback+0x42>
+            {
+                // Send the start bit
+                HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+ 80008f2:	2108      	movs	r1, #8
+ 80008f4:	4826      	ldr	r0, [pc, #152]	; (8000990 <HAL_TIM_PeriodElapsedCallback+0xcc>)
+ 80008f6:	f001 fbcf 	bl	8002098 <HAL_TIM_PWM_Start>
+                ir_ctrl.next_bit++;
+ 80008fa:	4b24      	ldr	r3, [pc, #144]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 80008fc:	685b      	ldr	r3, [r3, #4]
+ 80008fe:	3301      	adds	r3, #1
+ 8000900:	4a22      	ldr	r2, [pc, #136]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000902:	6053      	str	r3, [r2, #4]
+ 8000904:	e02e      	b.n	8000964 <HAL_TIM_PeriodElapsedCallback+0xa0>
+            }
+            else if (ir_ctrl.next_bit < 8)
+ 8000906:	4b21      	ldr	r3, [pc, #132]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000908:	685b      	ldr	r3, [r3, #4]
+ 800090a:	2b07      	cmp	r3, #7
+ 800090c:	dc1d      	bgt.n	800094a <HAL_TIM_PeriodElapsedCallback+0x86>
+            {
+                // Send a bit
+                if (ir_ctrl.buffer[ir_ctrl.current_byte] >> ir_ctrl.next_bit & 0x1)
+ 800090e:	4b1f      	ldr	r3, [pc, #124]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000910:	689b      	ldr	r3, [r3, #8]
+ 8000912:	4a1e      	ldr	r2, [pc, #120]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000914:	6812      	ldr	r2, [r2, #0]
+ 8000916:	4413      	add	r3, r2
+ 8000918:	781b      	ldrb	r3, [r3, #0]
+ 800091a:	461a      	mov	r2, r3
+ 800091c:	4b1b      	ldr	r3, [pc, #108]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 800091e:	685b      	ldr	r3, [r3, #4]
+ 8000920:	fa42 f303 	asr.w	r3, r2, r3
+ 8000924:	f003 0301 	and.w	r3, r3, #1
+ 8000928:	2b00      	cmp	r3, #0
+ 800092a:	d004      	beq.n	8000936 <HAL_TIM_PeriodElapsedCallback+0x72>
+                {
+                    // Stop the carrier to send a 1
+                    HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_3);
+ 800092c:	2108      	movs	r1, #8
+ 800092e:	4818      	ldr	r0, [pc, #96]	; (8000990 <HAL_TIM_PeriodElapsedCallback+0xcc>)
+ 8000930:	f001 fc62 	bl	80021f8 <HAL_TIM_PWM_Stop>
+ 8000934:	e003      	b.n	800093e <HAL_TIM_PeriodElapsedCallback+0x7a>
+                }
+                else
+                {
+                    // Start the carrier to send a 0
+                    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+ 8000936:	2108      	movs	r1, #8
+ 8000938:	4815      	ldr	r0, [pc, #84]	; (8000990 <HAL_TIM_PeriodElapsedCallback+0xcc>)
+ 800093a:	f001 fbad 	bl	8002098 <HAL_TIM_PWM_Start>
+                }
+                ir_ctrl.next_bit++;
+ 800093e:	4b13      	ldr	r3, [pc, #76]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000940:	685b      	ldr	r3, [r3, #4]
+ 8000942:	3301      	adds	r3, #1
+ 8000944:	4a11      	ldr	r2, [pc, #68]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000946:	6053      	str	r3, [r2, #4]
+ 8000948:	e00c      	b.n	8000964 <HAL_TIM_PeriodElapsedCallback+0xa0>
+            }
+            else
+            {
+                // Send the STOP bit
+                HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_3);
+ 800094a:	2108      	movs	r1, #8
+ 800094c:	4810      	ldr	r0, [pc, #64]	; (8000990 <HAL_TIM_PeriodElapsedCallback+0xcc>)
+ 800094e:	f001 fc53 	bl	80021f8 <HAL_TIM_PWM_Stop>
 
+                // Reset the bit and increment the byte
+                ir_ctrl.next_bit = -1;
+ 8000952:	4b0e      	ldr	r3, [pc, #56]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000954:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+ 8000958:	605a      	str	r2, [r3, #4]
+                ir_ctrl.current_byte++;
+ 800095a:	4b0c      	ldr	r3, [pc, #48]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 800095c:	681b      	ldr	r3, [r3, #0]
+ 800095e:	3301      	adds	r3, #1
+ 8000960:	4a0a      	ldr	r2, [pc, #40]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000962:	6013      	str	r3, [r2, #0]
+            }
+
+            // If we've reached the end of the content we reset the pointer and stop the timer
+            if (ir_ctrl.current_byte == ir_ctrl.buffer_length)
+ 8000964:	4b09      	ldr	r3, [pc, #36]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000966:	681a      	ldr	r2, [r3, #0]
+ 8000968:	4b08      	ldr	r3, [pc, #32]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 800096a:	68db      	ldr	r3, [r3, #12]
+ 800096c:	429a      	cmp	r2, r3
+ 800096e:	d106      	bne.n	800097e <HAL_TIM_PeriodElapsedCallback+0xba>
+            {
+                ir_ctrl.current_byte = -1;
+ 8000970:	4b06      	ldr	r3, [pc, #24]	; (800098c <HAL_TIM_PeriodElapsedCallback+0xc8>)
+ 8000972:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+ 8000976:	601a      	str	r2, [r3, #0]
+                HAL_TIM_Base_Stop_IT(&htim4);
+ 8000978:	4803      	ldr	r0, [pc, #12]	; (8000988 <HAL_TIM_PeriodElapsedCallback+0xc4>)
+ 800097a:	f001 fb0f 	bl	8001f9c <HAL_TIM_Base_Stop_IT>
+            }
+        }
+    }
 }
- 800093a:	bf00      	nop
- 800093c:	bd80      	pop	{r7, pc}
- 800093e:	bf00      	nop
- 8000940:	20000110 	.word	0x20000110
- 8000944:	40004400 	.word	0x40004400
+ 800097e:	bf00      	nop
+ 8000980:	3708      	adds	r7, #8
+ 8000982:	46bd      	mov	sp, r7
+ 8000984:	bd80      	pop	{r7, pc}
+ 8000986:	bf00      	nop
+ 8000988:	20000080 	.word	0x20000080
+ 800098c:	20000000 	.word	0x20000000
+ 8000990:	20000038 	.word	0x20000038
 
-08000948 <MX_GPIO_Init>:
-/**
- * @brief GPIO Initialization Function
- * @param None
- * @retval None
- */
-static void MX_GPIO_Init(void) {
- 8000948:	b580      	push	{r7, lr}
- 800094a:	b08a      	sub	sp, #40	; 0x28
- 800094c:	af00      	add	r7, sp, #0
-	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
- 800094e:	f107 0314 	add.w	r3, r7, #20
- 8000952:	2200      	movs	r2, #0
- 8000954:	601a      	str	r2, [r3, #0]
- 8000956:	605a      	str	r2, [r3, #4]
- 8000958:	609a      	str	r2, [r3, #8]
- 800095a:	60da      	str	r2, [r3, #12]
- 800095c:	611a      	str	r2, [r3, #16]
-	/* USER CODE BEGIN MX_GPIO_Init_1 */
-	/* USER CODE END MX_GPIO_Init_1 */
+08000994 <HAL_UART_RxCpltCallback>:
 
-	/* GPIO Ports Clock Enable */
-	__HAL_RCC_GPIOC_CLK_ENABLE();
- 800095e:	2300      	movs	r3, #0
- 8000960:	613b      	str	r3, [r7, #16]
- 8000962:	4b2d      	ldr	r3, [pc, #180]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 8000964:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000966:	4a2c      	ldr	r2, [pc, #176]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 8000968:	f043 0304 	orr.w	r3, r3, #4
- 800096c:	6313      	str	r3, [r2, #48]	; 0x30
- 800096e:	4b2a      	ldr	r3, [pc, #168]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 8000970:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000972:	f003 0304 	and.w	r3, r3, #4
- 8000976:	613b      	str	r3, [r7, #16]
- 8000978:	693b      	ldr	r3, [r7, #16]
-	__HAL_RCC_GPIOH_CLK_ENABLE();
- 800097a:	2300      	movs	r3, #0
- 800097c:	60fb      	str	r3, [r7, #12]
- 800097e:	4b26      	ldr	r3, [pc, #152]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 8000980:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 8000982:	4a25      	ldr	r2, [pc, #148]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 8000984:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 8000988:	6313      	str	r3, [r2, #48]	; 0x30
- 800098a:	4b23      	ldr	r3, [pc, #140]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 800098c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 800098e:	f003 0380 	and.w	r3, r3, #128	; 0x80
- 8000992:	60fb      	str	r3, [r7, #12]
- 8000994:	68fb      	ldr	r3, [r7, #12]
-	__HAL_RCC_GPIOA_CLK_ENABLE();
- 8000996:	2300      	movs	r3, #0
- 8000998:	60bb      	str	r3, [r7, #8]
- 800099a:	4b1f      	ldr	r3, [pc, #124]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 800099c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 800099e:	4a1e      	ldr	r2, [pc, #120]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 80009a0:	f043 0301 	orr.w	r3, r3, #1
- 80009a4:	6313      	str	r3, [r2, #48]	; 0x30
- 80009a6:	4b1c      	ldr	r3, [pc, #112]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 80009a8:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 80009aa:	f003 0301 	and.w	r3, r3, #1
- 80009ae:	60bb      	str	r3, [r7, #8]
- 80009b0:	68bb      	ldr	r3, [r7, #8]
-	__HAL_RCC_GPIOB_CLK_ENABLE();
- 80009b2:	2300      	movs	r3, #0
- 80009b4:	607b      	str	r3, [r7, #4]
- 80009b6:	4b18      	ldr	r3, [pc, #96]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 80009b8:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 80009ba:	4a17      	ldr	r2, [pc, #92]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 80009bc:	f043 0302 	orr.w	r3, r3, #2
- 80009c0:	6313      	str	r3, [r2, #48]	; 0x30
- 80009c2:	4b15      	ldr	r3, [pc, #84]	; (8000a18 <MX_GPIO_Init+0xd0>)
- 80009c4:	6b1b      	ldr	r3, [r3, #48]	; 0x30
- 80009c6:	f003 0302 	and.w	r3, r3, #2
- 80009ca:	607b      	str	r3, [r7, #4]
- 80009cc:	687b      	ldr	r3, [r7, #4]
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+ 8000994:	b580      	push	{r7, lr}
+ 8000996:	b082      	sub	sp, #8
+ 8000998:	af00      	add	r7, sp, #0
+ 800099a:	6078      	str	r0, [r7, #4]
+    if (huart == &huart1)
+ 800099c:	687b      	ldr	r3, [r7, #4]
+ 800099e:	4a10      	ldr	r2, [pc, #64]	; (80009e0 <HAL_UART_RxCpltCallback+0x4c>)
+ 80009a0:	4293      	cmp	r3, r2
+ 80009a2:	d10c      	bne.n	80009be <HAL_UART_RxCpltCallback+0x2a>
+    {
+        // Send what we received from the IR link to the terminal
+        HAL_UART_Transmit(&huart2, &uart1_buffer, 1, -1);
+ 80009a4:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 80009a8:	2201      	movs	r2, #1
+ 80009aa:	490e      	ldr	r1, [pc, #56]	; (80009e4 <HAL_UART_RxCpltCallback+0x50>)
+ 80009ac:	480e      	ldr	r0, [pc, #56]	; (80009e8 <HAL_UART_RxCpltCallback+0x54>)
+ 80009ae:	f002 fad3 	bl	8002f58 <HAL_UART_Transmit>
 
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
- 80009ce:	2200      	movs	r2, #0
- 80009d0:	2120      	movs	r1, #32
- 80009d2:	4812      	ldr	r0, [pc, #72]	; (8000a1c <MX_GPIO_Init+0xd4>)
- 80009d4:	f000 fd7e 	bl	80014d4 <HAL_GPIO_WritePin>
+        // Setup the peripheral to receive another byte
+        HAL_UART_Receive_IT(&huart1, &uart1_buffer, 1);
+ 80009b2:	2201      	movs	r2, #1
+ 80009b4:	490b      	ldr	r1, [pc, #44]	; (80009e4 <HAL_UART_RxCpltCallback+0x50>)
+ 80009b6:	480a      	ldr	r0, [pc, #40]	; (80009e0 <HAL_UART_RxCpltCallback+0x4c>)
+ 80009b8:	f002 fb59 	bl	800306e <HAL_UART_Receive_IT>
+        send_IR_string(&uart2_buffer, 1);
 
-	/*Configure GPIO pin : B1_Pin */
-	GPIO_InitStruct.Pin = B1_Pin;
- 80009d8:	f44f 5300 	mov.w	r3, #8192	; 0x2000
- 80009dc:	617b      	str	r3, [r7, #20]
-	GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
- 80009de:	f44f 1304 	mov.w	r3, #2162688	; 0x210000
- 80009e2:	61bb      	str	r3, [r7, #24]
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
- 80009e4:	2300      	movs	r3, #0
- 80009e6:	61fb      	str	r3, [r7, #28]
-	HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
- 80009e8:	f107 0314 	add.w	r3, r7, #20
- 80009ec:	4619      	mov	r1, r3
- 80009ee:	480c      	ldr	r0, [pc, #48]	; (8000a20 <MX_GPIO_Init+0xd8>)
- 80009f0:	f000 fbec 	bl	80011cc <HAL_GPIO_Init>
-
-	/*Configure GPIO pin : LD2_Pin */
-	GPIO_InitStruct.Pin = LD2_Pin;
- 80009f4:	2320      	movs	r3, #32
- 80009f6:	617b      	str	r3, [r7, #20]
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 80009f8:	2301      	movs	r3, #1
- 80009fa:	61bb      	str	r3, [r7, #24]
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
- 80009fc:	2300      	movs	r3, #0
- 80009fe:	61fb      	str	r3, [r7, #28]
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 8000a00:	2300      	movs	r3, #0
- 8000a02:	623b      	str	r3, [r7, #32]
-	HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
- 8000a04:	f107 0314 	add.w	r3, r7, #20
- 8000a08:	4619      	mov	r1, r3
- 8000a0a:	4804      	ldr	r0, [pc, #16]	; (8000a1c <MX_GPIO_Init+0xd4>)
- 8000a0c:	f000 fbde 	bl	80011cc <HAL_GPIO_Init>
-
-	/* USER CODE BEGIN MX_GPIO_Init_2 */
-	/* USER CODE END MX_GPIO_Init_2 */
+        // Setup the peripheral to receive another byte
+        HAL_UART_Receive_IT(&huart2, &uart2_buffer, 1);
+    }
 }
- 8000a10:	bf00      	nop
- 8000a12:	3728      	adds	r7, #40	; 0x28
- 8000a14:	46bd      	mov	sp, r7
- 8000a16:	bd80      	pop	{r7, pc}
- 8000a18:	40023800 	.word	0x40023800
- 8000a1c:	40020000 	.word	0x40020000
- 8000a20:	40020800 	.word	0x40020800
+ 80009bc:	e00c      	b.n	80009d8 <HAL_UART_RxCpltCallback+0x44>
+    else if (huart == &huart2)
+ 80009be:	687b      	ldr	r3, [r7, #4]
+ 80009c0:	4a09      	ldr	r2, [pc, #36]	; (80009e8 <HAL_UART_RxCpltCallback+0x54>)
+ 80009c2:	4293      	cmp	r3, r2
+ 80009c4:	d108      	bne.n	80009d8 <HAL_UART_RxCpltCallback+0x44>
+        send_IR_string(&uart2_buffer, 1);
+ 80009c6:	2101      	movs	r1, #1
+ 80009c8:	4808      	ldr	r0, [pc, #32]	; (80009ec <HAL_UART_RxCpltCallback+0x58>)
+ 80009ca:	f000 f811 	bl	80009f0 <send_IR_string>
+        HAL_UART_Receive_IT(&huart2, &uart2_buffer, 1);
+ 80009ce:	2201      	movs	r2, #1
+ 80009d0:	4906      	ldr	r1, [pc, #24]	; (80009ec <HAL_UART_RxCpltCallback+0x58>)
+ 80009d2:	4805      	ldr	r0, [pc, #20]	; (80009e8 <HAL_UART_RxCpltCallback+0x54>)
+ 80009d4:	f002 fb4b 	bl	800306e <HAL_UART_Receive_IT>
+}
+ 80009d8:	bf00      	nop
+ 80009da:	3708      	adds	r7, #8
+ 80009dc:	46bd      	mov	sp, r7
+ 80009de:	bd80      	pop	{r7, pc}
+ 80009e0:	200000c8 	.word	0x200000c8
+ 80009e4:	20000158 	.word	0x20000158
+ 80009e8:	20000110 	.word	0x20000110
+ 80009ec:	20000159 	.word	0x20000159
+
+080009f0 <send_IR_string>:
+
+void send_IR_string(uint8_t *data, int length)
+{
+ 80009f0:	b580      	push	{r7, lr}
+ 80009f2:	b082      	sub	sp, #8
+ 80009f4:	af00      	add	r7, sp, #0
+ 80009f6:	6078      	str	r0, [r7, #4]
+ 80009f8:	6039      	str	r1, [r7, #0]
+    ir_ctrl.buffer = data;
+ 80009fa:	4a08      	ldr	r2, [pc, #32]	; (8000a1c <send_IR_string+0x2c>)
+ 80009fc:	687b      	ldr	r3, [r7, #4]
+ 80009fe:	6093      	str	r3, [r2, #8]
+    ir_ctrl.buffer_length = length;
+ 8000a00:	4a06      	ldr	r2, [pc, #24]	; (8000a1c <send_IR_string+0x2c>)
+ 8000a02:	683b      	ldr	r3, [r7, #0]
+ 8000a04:	60d3      	str	r3, [r2, #12]
+    ir_ctrl.current_byte = 0;
+ 8000a06:	4b05      	ldr	r3, [pc, #20]	; (8000a1c <send_IR_string+0x2c>)
+ 8000a08:	2200      	movs	r2, #0
+ 8000a0a:	601a      	str	r2, [r3, #0]
+
+    HAL_TIM_Base_Start_IT(&htim4);
+ 8000a0c:	4804      	ldr	r0, [pc, #16]	; (8000a20 <send_IR_string+0x30>)
+ 8000a0e:	f001 fa63 	bl	8001ed8 <HAL_TIM_Base_Start_IT>
+}
+ 8000a12:	bf00      	nop
+ 8000a14:	3708      	adds	r7, #8
+ 8000a16:	46bd      	mov	sp, r7
+ 8000a18:	bd80      	pop	{r7, pc}
+ 8000a1a:	bf00      	nop
+ 8000a1c:	20000000 	.word	0x20000000
+ 8000a20:	20000080 	.word	0x20000080
 
 08000a24 <Error_Handler>:
-
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
-void Error_Handler(void) {
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
  8000a24:	b480      	push	{r7}
  8000a26:	af00      	add	r7, sp, #0
   \details Disables IRQ interrupts by setting special-purpose register PRIMASK.
@@ -1288,10 +1307,10 @@ __STATIC_FORCEINLINE void __disable_irq(void)
  8000a28:	b672      	cpsid	i
 }
  8000a2a:	bf00      	nop
-	/* USER CODE BEGIN Error_Handler_Debug */
-	/* User can add his own implementation to report the HAL error return state */
-	__disable_irq();
-	while (1) {
+  /* USER CODE BEGIN Error_Handler_Debug */
+    /* User can add his own implementation to report the HAL error return state */
+    __disable_irq();
+    while (1)
  8000a2c:	e7fe      	b.n	8000a2c <Error_Handler+0x8>
 	...
 
@@ -1410,42 +1429,42 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
  8000ac2:	b084      	sub	sp, #16
  8000ac4:	af00      	add	r7, sp, #0
  8000ac6:	6078      	str	r0, [r7, #4]
-  if(htim_base->Instance==TIM3)
+  if(htim_base->Instance==TIM4)
  8000ac8:	687b      	ldr	r3, [r7, #4]
  8000aca:	681b      	ldr	r3, [r3, #0]
  8000acc:	4a0e      	ldr	r2, [pc, #56]	; (8000b08 <HAL_TIM_Base_MspInit+0x48>)
  8000ace:	4293      	cmp	r3, r2
  8000ad0:	d115      	bne.n	8000afe <HAL_TIM_Base_MspInit+0x3e>
   {
-  /* USER CODE BEGIN TIM3_MspInit 0 */
+  /* USER CODE BEGIN TIM4_MspInit 0 */
 
-  /* USER CODE END TIM3_MspInit 0 */
+  /* USER CODE END TIM4_MspInit 0 */
     /* Peripheral clock enable */
-    __HAL_RCC_TIM3_CLK_ENABLE();
+    __HAL_RCC_TIM4_CLK_ENABLE();
  8000ad2:	2300      	movs	r3, #0
  8000ad4:	60fb      	str	r3, [r7, #12]
  8000ad6:	4b0d      	ldr	r3, [pc, #52]	; (8000b0c <HAL_TIM_Base_MspInit+0x4c>)
  8000ad8:	6c1b      	ldr	r3, [r3, #64]	; 0x40
  8000ada:	4a0c      	ldr	r2, [pc, #48]	; (8000b0c <HAL_TIM_Base_MspInit+0x4c>)
- 8000adc:	f043 0302 	orr.w	r3, r3, #2
+ 8000adc:	f043 0304 	orr.w	r3, r3, #4
  8000ae0:	6413      	str	r3, [r2, #64]	; 0x40
  8000ae2:	4b0a      	ldr	r3, [pc, #40]	; (8000b0c <HAL_TIM_Base_MspInit+0x4c>)
  8000ae4:	6c1b      	ldr	r3, [r3, #64]	; 0x40
- 8000ae6:	f003 0302 	and.w	r3, r3, #2
+ 8000ae6:	f003 0304 	and.w	r3, r3, #4
  8000aea:	60fb      	str	r3, [r7, #12]
  8000aec:	68fb      	ldr	r3, [r7, #12]
-    /* TIM3 interrupt Init */
-    HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
+    /* TIM4 interrupt Init */
+    HAL_NVIC_SetPriority(TIM4_IRQn, 0, 0);
  8000aee:	2200      	movs	r2, #0
  8000af0:	2100      	movs	r1, #0
- 8000af2:	201d      	movs	r0, #29
+ 8000af2:	201e      	movs	r0, #30
  8000af4:	f000 faa1 	bl	800103a <HAL_NVIC_SetPriority>
-    HAL_NVIC_EnableIRQ(TIM3_IRQn);
- 8000af8:	201d      	movs	r0, #29
+    HAL_NVIC_EnableIRQ(TIM4_IRQn);
+ 8000af8:	201e      	movs	r0, #30
  8000afa:	f000 faba 	bl	8001072 <HAL_NVIC_EnableIRQ>
-  /* USER CODE BEGIN TIM3_MspInit 1 */
+  /* USER CODE BEGIN TIM4_MspInit 1 */
 
-  /* USER CODE END TIM3_MspInit 1 */
+  /* USER CODE END TIM4_MspInit 1 */
   }
 
 }
@@ -1454,7 +1473,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
  8000b02:	46bd      	mov	sp, r7
  8000b04:	bd80      	pop	{r7, pc}
  8000b06:	bf00      	nop
- 8000b08:	40000400 	.word	0x40000400
+ 8000b08:	40000800 	.word	0x40000800
  8000b0c:	40023800 	.word	0x40023800
 
 08000b10 <HAL_TIM_MspPostInit>:
@@ -1857,24 +1876,24 @@ void SysTick_Handler(void)
  8000ce8:	bf00      	nop
  8000cea:	bd80      	pop	{r7, pc}
 
-08000cec <TIM3_IRQHandler>:
+08000cec <TIM4_IRQHandler>:
 
 /**
-  * @brief This function handles TIM3 global interrupt.
+  * @brief This function handles TIM4 global interrupt.
   */
-void TIM3_IRQHandler(void)
+void TIM4_IRQHandler(void)
 {
  8000cec:	b580      	push	{r7, lr}
  8000cee:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN TIM3_IRQn 0 */
+  /* USER CODE BEGIN TIM4_IRQn 0 */
 
-  /* USER CODE END TIM3_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim3);
- 8000cf0:	4802      	ldr	r0, [pc, #8]	; (8000cfc <TIM3_IRQHandler+0x10>)
+  /* USER CODE END TIM4_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim4);
+ 8000cf0:	4802      	ldr	r0, [pc, #8]	; (8000cfc <TIM4_IRQHandler+0x10>)
  8000cf2:	f001 fae5 	bl	80022c0 <HAL_TIM_IRQHandler>
-  /* USER CODE BEGIN TIM3_IRQn 1 */
+  /* USER CODE BEGIN TIM4_IRQn 1 */
 
-  /* USER CODE END TIM3_IRQn 1 */
+  /* USER CODE END TIM4_IRQn 1 */
 }
  8000cf6:	bf00      	nop
  8000cf8:	bd80      	pop	{r7, pc}
@@ -2035,7 +2054,7 @@ LoopFillZerobss:
  8000d7a:	f003 f8fb 	bl	8003f74 <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
- 8000d7e:	f7ff fc57 	bl	8000630 <main>
+ 8000d7e:	f7ff fba7 	bl	80004d0 <main>
   bx  lr    
  8000d82:	4770      	bx	lr
   ldr   sp, =_estack    		 /* set stack pointer */
@@ -5943,7 +5962,7 @@ void HAL_TIM_IRQHandler(TIM_HandleTypeDef *htim)
 #else
       HAL_TIM_PeriodElapsedCallback(htim);
  8002426:	6878      	ldr	r0, [r7, #4]
- 8002428:	f7fe f852 	bl	80004d0 <HAL_TIM_PeriodElapsedCallback>
+ 8002428:	f7fe fa4c 	bl	80008c4 <HAL_TIM_PeriodElapsedCallback>
 #endif /* USE_HAL_TIM_REGISTER_CALLBACKS */
     }
   }
@@ -9960,7 +9979,7 @@ static HAL_StatusTypeDef UART_Receive_IT(UART_HandleTypeDef *huart)
         /*Call legacy weak Rx complete callback*/
         HAL_UART_RxCpltCallback(huart);
  8003a64:	6878      	ldr	r0, [r7, #4]
- 8003a66:	f7fc fdb5 	bl	80005d4 <HAL_UART_RxCpltCallback>
+ 8003a66:	f7fc ff95 	bl	8000994 <HAL_UART_RxCpltCallback>
 #endif /* USE_HAL_UART_REGISTER_CALLBACKS */
       }
 
