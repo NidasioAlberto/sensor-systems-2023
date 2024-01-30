@@ -109,4 +109,4 @@ Objective: Read a quadrature encoder, using the specific mode of STM32 timers, i
 
 ## 10: Half-duplex communication between boards
 
-Objective: Implement an half-duplex link to enable communication between multiple boards, using the infrared led and photodiode available on the development board. 
+Objective: Implement an half-duplex link to enable communication between multiple boards, using the infrared led and photodiode available on the development board.

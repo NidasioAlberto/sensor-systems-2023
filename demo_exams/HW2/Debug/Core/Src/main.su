@@ -1,0 +1,14 @@
+../Core/Src/main.c:103:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/main.c:116:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/main.c:120:6:play_song	8	static
+../Core/Src/main.c:131:6:play_next_note	8	static
+../Core/Src/main.c:142:6:play_note	104	static
+../Core/Src/main.c:197:6:setup_tim2_next_interrupt	40	static
+../Core/Src/main.c:234:5:main	8	static
+../Core/Src/main.c:281:6:SystemClock_Config	88	static
+../Core/Src/main.c:324:13:MX_NVIC_Init	8	static
+../Core/Src/main.c:335:13:MX_TIM1_Init	96	static
+../Core/Src/main.c:406:13:MX_TIM2_Init	32	static
+../Core/Src/main.c:448:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:479:13:MX_GPIO_Init	48	static
+../Core/Src/main.c:531:6:Error_Handler	4	static,ignoring_inline_asm
