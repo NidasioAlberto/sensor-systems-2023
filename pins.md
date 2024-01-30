@@ -1,0 +1,25 @@
+PINS:
+- Green led: PA5
+- User button: PC13
+- Microphone: PA8
+- Potentiometer: PA1
+- Encoder: PC7 (TIM3_CH2), PC6 (TIM3_CH1)
+- Keyboard: PC8-11 OUTPUT (column driver), PC12,13,2,3 INPUT (row readout)
+- LCD:
+  - PB12-15
+  - PB1-2
+  - PA4
+- USART2:
+  - rx: PA3
+  - tx: PA2
+- I2C:
+  - SDA: PB9
+  - SCL: PB8
+  - Temperature sensor address: 0b1001000<<1 (watch out to the version of the sensor)
+  - accelerator sensor address: 0b0101000<<1 (watch out to the version of the sensor)
+- SPI: (1,4 up to 42Mbps; 2,3 up to 21Mbps)
+  - led matrix (daisy-chain configuration, MSB first) update 4ms
+  - PA5 (SCK), PA6(MISO), PA7(MOSI), PB6 (FOR LEDMATRIX: after transfer complete, SET and then RESET)
+- IR:
+  - LED: PB10 (TIM2_CH3)
+  - Receiver: PA10 (USART1_RX)
