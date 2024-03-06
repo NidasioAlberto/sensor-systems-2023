@@ -61,7 +61,7 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-char name[] = "Pier Francesco - 2001 \n";
+char name[] = "Pier Francesco - 2001\r\n";
 // To prevent warning, the pointer is cast to unsigned char
 const unsigned char* name_ptr = (unsigned char*) name;
 /* USER CODE END 0 */
