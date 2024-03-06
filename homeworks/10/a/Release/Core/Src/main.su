@@ -1,6 +1,0 @@
-../Core/Src/main.c:79:6:HAL_TIM_PeriodElapsedCallback	8	static
-../Core/Src/main.c:113:6:sendStringIR	0	static
-../Core/Src/main.c:122:6:HAL_UART_RxCpltCallback	8	static
-../Core/Src/main.c:203:6:SystemClock_Config	88	static,ignoring_inline_asm
-../Core/Src/main.c:142:5:main	64	static,ignoring_inline_asm
-../Core/Src/main.c:437:6:Error_Handler	0	static,ignoring_inline_asm

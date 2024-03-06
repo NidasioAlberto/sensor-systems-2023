@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := a
+BUILD_ARTIFACT_NAME := HW_10a
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-a.elf \
+HW_10a.elf \
 
 MAP_FILES += \
-a.map \
+HW_10a.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-a.list \
+HW_10a.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: a.elf secondary-outputs
+main-build: HW_10a.elf secondary-outputs
 
 # Tool invocations
-a.elf a.map: $(OBJS) $(USER_OBJS) /Users/alberton/Documents/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "a.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/alberton/Documents/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="a.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+HW_10a.elf HW_10a.map: $(OBJS) $(USER_OBJS) /home/matteo/Scrivania/UNI/Sensor\ Systems/Homeworks/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "HW_10a.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/matteo/Scrivania/UNI/Sensor Systems/Homeworks/sensor-systems-2023/homeworks/10/a/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="HW_10a.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-a.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "a.list"
+HW_10a.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "HW_10a.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) a.elf a.list a.map default.size.stdout
+	-$(RM) HW_10a.elf HW_10a.list HW_10a.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
